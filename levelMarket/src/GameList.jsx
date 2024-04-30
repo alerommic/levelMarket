@@ -15,10 +15,10 @@ const GameList = () => {
     <div>
       
       {gameList && gameList.map((game) => {
-        {console.log(game)}
+        return (
         <div key={game.gameid}>
-          <h1>game by {game.name}</h1>
-          </div>
+          <h1>{game.name}</h1>
+          </div>)
       })}
     </div>
   );
