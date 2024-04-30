@@ -5,8 +5,8 @@ const GameList = () => {
   const {data : gameList, isPending, error} = useFetch("http://localhost:8000/GameList/")
 
   return (
-    <div className="flex align-middle m-8 p-8">
-      {error && <div>{error}</div>}
+    <div className="m-8 p-8">
+      {error && <div className="align-middle">{error}</div>}
       {isPending && <Loading/>}
       {gameList && <Games games={gameList}></Games>}
     </div>
