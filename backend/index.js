@@ -7,31 +7,32 @@ require('dotenv').config()
 app.use(cors());
 app.use(express.json());
 
-
-const client = new Pool({
+const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
 })
 
-getGames();
+app.get('/GameList', async (req, res) => {
+  try {
+    const client = await pool.connect();
 
-function getGames() {
+    //consulta SQL para obtener juegos con imágenes
+    const query = `
+      SELECT g.*, i.imageurl
+      FROM games g
+      LEFT JOIN images i ON g.gameid = i.gameid
+    `;
+    const result = await client.query(query);
 
-client.connect();
+    client.release(); // Liberar la conexión al pool
 
-client.query("SELECT * FROM games", (err, res) => {
-  if (!err) {
-    data = res.rows
-  } else {
-    console.log(err.message)
+    res.json(result.rows); // Enviar los resultados como JSON
+  } catch (error) {
+    console.error('Error al obtener la lista de juegos:', error.message);
   }
-  client.end;
+});
 
-  app.get("/GameList", (req, res) => {
-    res.json(data);
-  });
-  
-  app.listen(8000, () => {
-    console.log(`Server is running on port 8000.`);
-  });
-  
-})}
+// Iniciar el servidor
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log(`Servidor en ejecución en el puerto ${PORT}`);
+});
