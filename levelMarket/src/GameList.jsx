@@ -1,25 +1,14 @@
-import { useState, useEffect } from "react";
-
+import useFetch from "./useFetch";
+import Games from "./Games"
+import Loading from "./assets/Loading";
 const GameList = () => {
-  const [gameList, setGameList] = useState(null);
-
-  useEffect(() => {
-    fetch("http://localhost:8000/GameList/")
-      .then(res =>  {
-        return res.json()})
-      .then(data => {
-        setGameList(data)});
-  }, []);
+  const {data : gameList, isPending, error} = useFetch("http://localhost:8000/GameList/")
 
   return (
-    <div>
-      
-      {gameList && gameList.map((game) => {
-        return (
-        <div key={game.gameid}>
-          <h1>{game.name}</h1>
-          </div>)
-      })}
+    <div className="flex align-middle m-8 p-8">
+      {error && <div>{error}</div>}
+      {isPending && <Loading/>}
+      {gameList && <Games games={gameList}></Games>}
     </div>
   );
 }

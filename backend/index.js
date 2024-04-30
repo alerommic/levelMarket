@@ -14,10 +14,6 @@ const client = new Pool({
 
 getGames();
 
-
-
-
-
 function getGames() {
 
 client.connect();

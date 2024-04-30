@@ -8,6 +8,7 @@
     "client": "npm run dev --prefix ../levelMarket",
     "build": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client"
   },
+  
   "keywords": [],
   "author": "",
   "license": "ISC",
