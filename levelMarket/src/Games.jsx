@@ -7,15 +7,12 @@ const Games = (props) => {
     {gameList.map((game)=>{
       return(
         <div key={game.gameid}
-        className="block rounded-lg max-w-30 w-100 h-200 p-5 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+        className="flex flex-col border-solid rounded-lg max-w-30 max-h-18 p-5 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
         <a href="#!">
           <img
-          width="250px"
-          height="500px"
-            className="rounded-t-lg object-fill"
+            className="rounded-t-lg w-max h-max mx-auto"
             src={game.imageurl}
             alt={game.name} />
-            
         </a>
         <div className="flex flex-col px-6 pt-6">
           <h5
@@ -23,7 +20,7 @@ const Games = (props) => {
             {game.name}
           </h5>
           <p className="my-4 self-center text-base text-neutral-600 dark:text-neutral-200">
-            {game.price}
+            {game.price}€
           </p>
           <button 
               type="button"

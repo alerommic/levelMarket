@@ -23,7 +23,7 @@ app.get('/GameList', async (req, res) => {
     `;
     const result = await client.query(query);
 
-    client.release(); // Liberar la conexión al pool
+    client.release(); // Liberar la conexión 
 
     res.json(result.rows); // Enviar los resultados como JSON
   } catch (error) {

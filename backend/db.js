@@ -1,18 +1,8 @@
-const {Pool} = require("pg");
-require('dotenv').config()
+const { Pool } = require("pg");
+require('dotenv').config();
 
-const client = new Pool({
+const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
-})
+});
 
-client.connect();
-
-client.query("SELECT * FROM games", (err, res) => {
-  if (!err) {
-    console.log(res.rows)
-    data = res.rows
-  } else {
-    console.log(err.message)
-  }
-  client.end
-})
+module.exports = { pool };

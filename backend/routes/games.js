@@ -1,24 +1,25 @@
-const {Pool} = require("pg");
+const express = require('express');
+const router = express.Router();
+const { pool } = require('../db.js'); // Importa la configuración de la base de datos desde db.js
 
-app.get("/GameList", (req, res) => {
-  res.json(data);
-});
+router.get('/GameList', async (req, res) => {
+  try {
+    const client = await pool.connect();
 
-client.connect();
+    const query = `
+      SELECT g.*, i.imageurl
+      FROM games g
+      LEFT JOIN images i ON g.gameid = i.gameid
+    `;
+    const result = await client.query(query);
 
-const client = new Pool({
-  connectionString: process.env.POSTGRES_URL,
-})
-
-client.connect();
-
-client.query("SELECT * FROM games", (err, res) => {
-  if (!err) {
-    data = res.rows
-  } else {
-    console.log(err.message)
+    client.release();
+    
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error al obtener la lista de juegos:', error.message);
+    res.status(500).send('Error interno del servidor');
   }
-  client.end;
-})
+});
 
 module.exports = router;

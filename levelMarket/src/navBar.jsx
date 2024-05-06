@@ -4,7 +4,7 @@ import GameIcon from "./assets/GameIcon";
 import {Link} from "react-router-dom";
 const NavBar = () => {
   return (
-    <nav className="flex sticky top-0 bg-slate-50 shadow-md justify-between items-center px-6 py-4">
+    <nav className="flex sticky top-0 w-full bg-slate-50 shadow-md justify-between items-center px-6 py-4">
       <Link to="/"><h1 className="text-black text-xl font-bold">LevelMarket</h1></Link>
 
       <form className="">
