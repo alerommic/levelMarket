@@ -7,16 +7,16 @@ const Games = (props) => {
     {gameList.map((game)=>{
       return(
         <div key={game.gameid}
-        className="flex flex-col border-solid rounded-lg max-w-30 max-h-18 p-5 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+        className="flex flex-col justify-end border-solid rounded-lg min-w-10 max-w-30 h-full max-h-18 p-5 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
         <a href="#!">
           <img
-            className="rounded-t-lg w-max h-max mx-auto"
+            className="rounded-t-lg mx-auto w-[220px] h-[300px]"
             src={game.imageurl}
             alt={game.name} />
         </a>
-        <div className="flex flex-col px-6 pt-6">
+        <div className="flex flex-col px-6 pt-6 self-stretch">
           <h5
-            className="text-xl self-center font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+            className="text-xl truncate overflow-hidden self-center font-medium leading-tight text-neutral-800 dark:text-neutral-50">
             {game.name}
           </h5>
           <p className="my-4 self-center text-base text-neutral-600 dark:text-neutral-200">

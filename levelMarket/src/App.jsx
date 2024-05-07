@@ -4,12 +4,14 @@ import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom'
 import GameList from './GameList'
 import LogIn from './LogIn'
 import Cart from './Cart'
+import Footer from './Footer'
+import SignUp from './SignUp'
 function App() {
 
   return (
     <>
     <Router>
-      <section>
+      <section className='self-center'>
       <NavBar></NavBar>
       <Routes>
         
@@ -21,7 +23,10 @@ function App() {
         
         <Route path="/LogIn" element={<LogIn/>}/>
         
+        <Route path="/SignUp" element={<SignUp/>}/>
       </Routes>
+      <Footer>
+      </Footer>
       </section>
     </Router>
     </>

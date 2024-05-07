@@ -1,6 +1,7 @@
 import CartIcon from "./assets/CartIcon";
 import UserIcon from "./assets/UserIcon";
 import GameIcon from "./assets/GameIcon";
+import SearchIcon from "./assets/SearchIcon"
 import {Link} from "react-router-dom";
 const NavBar = () => {
   return (
@@ -12,7 +13,7 @@ const NavBar = () => {
           type="text"
           id="searchterm"
           placeholder="Search"
-          className="shadow-lg px-3 py-2 mr-2 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+          className="shadow-lg px-3 py-2 mr-2 rounded-md focus:outline-none focus:ring focus:border-blue-300 max-[640px]:hidden"
         />
         <button
           type="button"
@@ -22,8 +23,13 @@ const NavBar = () => {
         focus:bg-neutral-700 focus:shadow-dark-2 focus:outline-none focus:ring-0
         active:bg-neutral-900 active:shadow-dark-2 motion-reduce:transition-none
         dark:shadow-black/30 dark:hover:shadow-dark-strong 
-          dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">
-          Search
+          dark:focus:shadow-dark-strong dark:active:shadow-dark-strong max-[640px]:hidden">
+          searchBar 
+        </button>
+        <button
+          type="button"
+          className="hidden">
+          <SearchIcon></SearchIcon> 
         </button>
       </form>
       <ul className="flex space-x-4 align-middle">
