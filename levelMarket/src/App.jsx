@@ -6,6 +6,7 @@ import LogIn from './LogIn'
 import Cart from './Cart'
 import Footer from './Footer'
 import SignUp from './SignUp'
+import Admin from './Admin'
 function App() {
 
   return (
@@ -24,6 +25,8 @@ function App() {
         <Route path="/LogIn" element={<LogIn/>}/>
         
         <Route path="/SignUp" element={<SignUp/>}/>
+
+        <Route path="/Admin" element={<Admin/>}/>
       </Routes>
       <Footer>
       </Footer>
