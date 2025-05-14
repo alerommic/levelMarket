@@ -1,18 +1,62 @@
-const LogIn = () => {
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-  return ( 
-    <div className="p-4 m-4 align-middle">
-      <form action="/submit-login" method="POST" className="w-1/2">
-            <label htmlFor="username">Usuario:</label>
-            <input type="text" id="username" name="username" required/>
+const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-            <label htmlFor="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required/>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch('http://localhost:8000/')
+    console.log('Login:', { username, password });
 
-            <button>Iniciar Sesion</button>
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-slate-100">
+      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Iniciar Sesión</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="username" className="block text-gray-700">Nombre de usuario</label>
+            <input
+              type="text"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Introduce tu usuario"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="password" className="block text-gray-700">Contraseña</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Introduce tu contraseña"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+          >
+            Entrar
+          </button>
         </form>
+        <p className="mt-4 text-center text-gray-600">
+          ¿No tienes cuenta?{' '}
+          <Link to="/signup" className="text-blue-600 hover:underline">
+            Regístrate aquí
+          </Link>
+        </p>
+      </div>
     </div>
   );
-}
+};
 
-export default LogIn;
+export default Login;
