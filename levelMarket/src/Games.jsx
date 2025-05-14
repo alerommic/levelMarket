@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const Games = (props) => {
   const gameList = props.games
@@ -8,12 +9,13 @@ const Games = (props) => {
       return(
         <div key={game.gameid}
         className="flex flex-col justify-end border-solid rounded-lg min-w-10 max-w-30 h-full max-h-18 p-5 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-        <a href="#!">
+        <Link to={`/GameList/${game.gameid}`}>
           <img
-            className="rounded-t-lg mx-auto w-[220px] h-[300px]"
+            className="rounded-t-lg mx-auto w-[220px] h-[300px] cursor-pointer"
             src={game.imageurl}
-            alt={game.name} />
-        </a>
+            alt={game.name}
+          />
+        </Link>
         <div className="flex flex-col px-6 pt-6 self-stretch">
           <h5
             className="text-xl truncate overflow-hidden self-center font-medium leading-tight text-neutral-800 dark:text-neutral-50">
@@ -43,7 +45,7 @@ const Games = (props) => {
       
     </>);
 }
-
+//sin los prototypes da error
 Games.propTypes = {
   games: PropTypes.arrayOf(
     PropTypes.shape({

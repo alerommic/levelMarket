@@ -1,19 +1,39 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetch('http://localhost:8000/')
-    console.log('Login:', { username, password });
+  const navigate = useNavigate()
 
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await fetch('http://localhost:8000/login', {
+      method: 'POST',                        
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',                // cookies de sesión
+      body: JSON.stringify({ 
+        username, 
+        password 
+      }),
+    });
+
+    if (!res.ok) {
+      const { error } = await res.json();
+      console.error('Login fallido:', error);
+      return;
+    }
+
+    console.log('Login exitoso');
+    navigate('/');  // o donde quieras redirigir
+  } catch (err) {
+    console.error('Error de red:', err);
+  }};
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100">
+    <div className="min-h-screen flex items-center justify-center bg-slate-100 py-12 lg:px-8">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Iniciar Sesión</h2>
         <form onSubmit={handleSubmit} className="space-y-4">

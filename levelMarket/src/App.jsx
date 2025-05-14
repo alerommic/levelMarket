@@ -7,6 +7,9 @@ import Cart from './Cart'
 import Footer from './Footer'
 import SignUp from './SignUp'
 import Admin from './Admin'
+import Profile from './profile'
+import Orders from './Orders'
+import GameDetail from './GameDetail'
 function App() {
 
   return (
@@ -19,6 +22,7 @@ function App() {
         <Route path="/" element={<Home/>}/>
         
         <Route path="/GameList" element={<GameList/>}/>
+        <Route path="/GameList/:id" element={<GameDetail/>}/>
         
         <Route path="/Cart" element={<Cart/>}/>
         
@@ -27,6 +31,10 @@ function App() {
         <Route path="/SignUp" element={<SignUp/>}/>
 
         <Route path="/Admin" element={<Admin/>}/>
+        
+        <Route path="/profile" element={<Profile/>}/>
+
+        <Route path="/orders" element={<Orders/>}/>
       </Routes>
       <Footer>
       </Footer>
