@@ -4,6 +4,9 @@ import Loading from "./assets/Loading";
 import Header from "./Header"
 const GameList = () => {
   const {data : gameList, isPending, error} = useFetch("http://localhost:8000/GameList")
+  //const [filters, setFilters] = useState ({
+
+  //})
 
   return (
     <>

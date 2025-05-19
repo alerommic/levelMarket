@@ -3,17 +3,19 @@ import Home from './Home'
 import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom'
 import GameList from './GameList'
 import LogIn from './LogIn'
-import Cart from './Cart'
+
 import Footer from './Footer'
 import SignUp from './SignUp'
 import Admin from './Admin'
 import Profile from './profile'
 import Orders from './Orders'
 import GameDetail from './GameDetail'
+import { AuthContext, AuthProvider } from './AuthContext'
 function App() {
 
   return (
     <>
+    <AuthProvider>
     <Router>
       <section className='self-center'>
       <NavBar></NavBar>
@@ -24,7 +26,7 @@ function App() {
         <Route path="/GameList" element={<GameList/>}/>
         <Route path="/GameList/:id" element={<GameDetail/>}/>
         
-        <Route path="/Cart" element={<Cart/>}/>
+        
         
         <Route path="/LogIn" element={<LogIn/>}/>
         
@@ -40,6 +42,7 @@ function App() {
       </Footer>
       </section>
     </Router>
+    </AuthProvider>
     </>
   )
 }

@@ -13,9 +13,9 @@ const register = async (req, res) => {
       return res.status(409).json({ error: 'Usuario o email ya registrados' });
     }
 
-    // 2) Hashea la contraseña
+    // Hashea la contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
-    // 3) Insertar el usuario
+    // Insertar el usuario
     const insertQ = `
       INSERT INTO users (username, password, email, fullname, address)
       VALUES ($1, $2, $3, $4, $5)
@@ -24,41 +24,45 @@ const register = async (req, res) => {
     const result = await pool.query(insertQ, [
       username, hashedPassword, email, fullName, address
     ]);
-    // 4) Responder sin la contraseña
+    // Responder sin la contraseña
     res.status(201).json({ user: result.rows[0] });
   } catch (err) {
-    console.error('Error en register:', err);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    console.error('Error en el register:', err);
+    res.status(500).json({ error: 'Error interno en el servidor' });
   }
 };
 
 const login = async (req, res) => {
   const { username, password } = req.body;
   try {
-    // busca el nombre del usuario
+    // Busca el usuario
     const { rows } = await pool.query(
       'SELECT userid, username, password, is_admin FROM users WHERE username=$1',
       [username]
     );
     if (rows.length === 0) {
-      return res.status(401).json({ error: 'credenciales no validas' });
+      return res.status(401).json({ error: 'Credenciales no válidas' });
     }
     const user = rows[0];
-    // Comparar el hash
+
+    // Compara el hash de la contraseña
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
-      return res.status(401).json({ error: 'credenciales no validas' });
+      return res.status(401).json({ error: 'Credenciales no válidas' });
     }
-    // guarda la sesion
+
+    // Guarda en sesión
     req.session.user = {
       id:       user.userid,
       username: user.username,
       is_admin: user.is_admin
     };
-    res.json({ message: 'Login exitoso' });
+
+    // Devuelve el objeto de usuario para el frontend
+    return res.json({ user: req.session.user });
   } catch (err) {
-    console.error('Error en login:', err);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    console.error('Error en el login:', err);
+    return res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
 

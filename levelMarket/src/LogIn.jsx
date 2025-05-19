@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const { setUser } = useContext(AuthContext);
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
@@ -25,9 +26,10 @@ const Login = () => {
       console.error('Login fallido:', error);
       return;
     }
-
+    const { user } = await res.json();
+    setUser(user);
     console.log('Login exitoso');
-    navigate('/');  // o donde quieras redirigir
+    navigate('/');
   } catch (err) {
     console.error('Error de red:', err);
   }};

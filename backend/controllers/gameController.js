@@ -15,7 +15,7 @@ const getGameList = async (req, res) => {
     res.json(result.rows);
   } catch (error) {
     console.error("Error al obtener la lista de juegos:", error.message);
-    res.status(500).json({ error: "Error interno del servidor" });
+    res.status(500).json({ error: "Error interno en el servodir servidor" });
   }
 };
 

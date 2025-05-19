@@ -24,7 +24,7 @@ app.use(session({
   cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }));
 
-app.use('/', gamesRoutes); // Monta rutas como /GameList
+app.use('/', gamesRoutes);
 app.use('/', authRoutes);
 
 const PORT = process.env.PORT || 8000;

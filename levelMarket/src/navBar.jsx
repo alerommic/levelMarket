@@ -1,31 +1,31 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import CartIcon from "./assets/CartIcon";
 import UserIcon from "./assets/UserIcon";
 import GameIcon from "./assets/GameIcon";
 import SearchIcon from "./assets/SearchIcon";
+import useCart from './useCart';
+import { AuthContext } from './AuthContext';
 
 const NavBar = () => {
-  const [user, setUser] = useState(null);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef();
+  const { cart, removeItem, clearCart } = useCart();
+  const [userOpen, setUserOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const userRef = useRef();
+  const cartRef = useRef();
   const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
   // Comprueba estado de autenticación
-  useEffect(() => {
-    fetch('http://localhost:8000/me', {
-      credentials: 'include'
-    })
-      .then(res => res.ok ? res.json() : Promise.reject())
-      .then(data => setUser(data.user))
-      .catch(() => setUser(null));
-  }, []);
+  const { user, setUser } = useContext(AuthContext);
 
   // Cierra el menu desplegable al hacer clic fuera
   useEffect(() => {
     const handler = e => {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setMenuOpen(false);
+      if (userRef.current && !userRef.current.contains(e.target)) {
+        setUserOpen(false);
+      }
+      if (cartRef.current && !cartRef.current.contains(e.target)) {
+        setCartOpen(false);
       }
     };
     document.addEventListener('click', handler);
@@ -66,7 +66,6 @@ const NavBar = () => {
         <SearchIcon className="w-5 h-5" />
       </button>
 
-      {/* Overlay de búsqueda en móvil */}
       {searchOpen && (
         <div className="absolute inset-0 bg-slate-50 flex items-center px-4 sm:hidden z-10">
           <input
@@ -94,28 +93,74 @@ const NavBar = () => {
         <li>
           <Link to="/GameList"><GameIcon /></Link>
         </li>
-        <li>
-          <Link to="/Cart"><CartIcon /></Link>
+        <li className="relative" ref={cartRef}>
+        <button onClick={() => setCartOpen(o => !o)}>
+        <CartIcon />
+        </button>
+        {cartOpen && (
+                <div className="absolute right-0 mt-2 w-100 bg-white border rounded z-10">
+                  {cart.length === 0 ? (
+                <p className="p-4 text-center text-gray-500">Carrito vacío</p>
+              ) : (
+                <>
+                  <ul>
+                    {cart.map(item => (
+                      <li
+                        key={item.gameid}
+                        className="flex justify-between items-center px-4 py-2 hover:bg-gray-100"
+                      >
+                        <span className="truncate">{item.name} | {item.quantity}</span>
+                        <button
+                          onClick={() => removeItem(item.gameid)}
+                          className="text-red-500 hover:text-red-700"
+                          title="Eliminar"
+                        >
+                          &times;
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="border-t px-4 py-2 flex justify-between">
+                    <button
+                      onClick={clearCart}
+                      className="text-sm text-gray-600 hover:underline"
+                    >
+                      Vaciar carrito
+                    </button>
+                    <button
+                      onClick={() => {
+                        setCartOpen(false);
+                        navigate('/Cart');
+                      }}
+                      className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                    >
+                      Ver carrito
+                    </button>
+                  </div>
+                </>
+              )}
+                </div>
+              )}
         </li>
-        <li className="relative" ref={menuRef}>
+        <li className="relative" ref={userRef}>
           {user ? (
             <>
-              <button onClick={() => setMenuOpen(o => !o)}>
+              <button onClick={() => setUserOpen(o => !o)}>
                 <UserIcon />
               </button>
-              {menuOpen && (
+              {userOpen && (
                 <div className="absolute right-0 mt-2 w-40 bg-white border rounded shadow-lg z-10">
                   <Link
                     to="/profile"
                     className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => setUserOpen(false)}
                   >
                     Mi Perfil
                   </Link>
                   <Link
                     to="/orders"
                     className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={() => setMenuOpen(false)}
+                    onClick={() => setUserOpen(false)}
                   >
                     Mis Pedidos
                   </Link>
