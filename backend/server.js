@@ -6,7 +6,7 @@ require('dotenv').config();
 const app = express();
 const gamesRoutes = require('./routes/games');
 const authRoutes = require('./routes/auth');
-
+const adminRoutes = require('./routes/admin');
 app.use(cors({
   origin: 'http://localhost:5173',    // front
   methods: ['GET','POST','PUT','DELETE'],
@@ -26,6 +26,7 @@ app.use(session({
 
 app.use('/', gamesRoutes);
 app.use('/', authRoutes);
+app.use('/admin', adminRoutes);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {

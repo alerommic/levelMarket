@@ -100,21 +100,21 @@ const SignUp = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400"
               placeholder="Introduce tu contraseña"
               required
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+            className="w-full bg-neutral-900 text-white py-2 rounded-md hover:bg-neutral-700 transition"
           >
             Registrarse
           </button>
         </form>
         <p className="mt-4 text-center text-gray-600">
           ¿Ya tienes cuenta?{' '}
-          <Link to="/login" className="text-blue-600 hover:underline">
+          <Link to="/login" className="text-neutral-700 hover:underline">
             Inicia sesión aquí
           </Link>
         </p>

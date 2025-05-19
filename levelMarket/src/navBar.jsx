@@ -53,7 +53,7 @@ const NavBar = () => {
           className="flex-1 h-10 px-4 rounded-l-full border border-r-0 focus:outline-none"
         />
         <button
-          className="flex items-center justify-center h-10 w-10 rounded-r-full border border-l-0 bg-neutral-900 text-white"
+          className="flex items-center justify-center h-10 w-10 rounded-r-full border border-l-0 bg-neutral-300 text-white"
         >
           <SearchIcon className="w-5 h-5" />
         </button>
@@ -61,7 +61,7 @@ const NavBar = () => {
 
       <button
         onClick={() => setSearchOpen(true)}
-        className="sm:hidden p-2 flex rounded-full bg-neutral-500 text-white"
+        className="sm:hidden p-2 flex rounded-full bg-neutral-300 text-white"
       >
         <SearchIcon className="w-5 h-5" />
       </button>
@@ -75,7 +75,7 @@ const NavBar = () => {
             className="flex-1 h-10 px-4 rounded-l-full border border-r-0 focus:outline-none"
           />
           <button
-            className="flex items-center y justify-center h-10 w-10 rounded-r-full border border-l-0 bg-neutral-500 text-white"
+            className="flex items-center y justify-center h-10 w-10 rounded-r-full border border-l-0 bg-neutral-300 text-white"
           >
             <SearchIcon className="w-5 h-5" />
           </button>
@@ -133,7 +133,7 @@ const NavBar = () => {
                         setCartOpen(false);
                         navigate('/Cart');
                       }}
-                      className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                      className="bg-neutral-900  text-white px-3 py-1 rounded hover:bg-neutral-700"
                     >
                       Ver carrito
                     </button>
