@@ -10,12 +10,14 @@ import Admin from './Admin'
 import Profile from './profile'
 import Orders from './Orders'
 import GameDetail from './GameDetail'
-import { AuthContext, AuthProvider } from './AuthContext'
+import { AuthProvider } from './AuthContext'
+import { CartProvider } from './CartContext'
 function App() {
 
   return (
     <>
     <AuthProvider>
+    <CartProvider>
     <Router>
       <section className='self-center'>
       <NavBar></NavBar>
@@ -42,6 +44,7 @@ function App() {
       </Footer>
       </section>
     </Router>
+    </CartProvider>
     </AuthProvider>
     </>
   )

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import useFetch from './useFetch';
 import Loading from './assets/Loading';
-import useCart from './useCart'
+import { CartContext } from './CartContext';
+
 
 export default function GameDetail() {
   // Lee el id del url
@@ -11,8 +12,8 @@ export default function GameDetail() {
   // 2) le pasa el id del url
   const { data: game, isPending, error } = useFetch(`http://localhost:8000/GameList/${id}`);
 
-  const { addItem } = useCart();
-  
+  const { addItem } = useContext(CartContext);
+
   return (
     <div> 
       {error && <div className="align-middle">{error}</div>}
@@ -28,7 +29,7 @@ export default function GameDetail() {
             <img
               src={game.imageurl}
               alt={game.name}
-              className="w-30 h-auto rounded mb-4"
+              className="w-50 h-auto rounded mb-4"
             />
           )}
 

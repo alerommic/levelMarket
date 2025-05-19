@@ -5,11 +5,13 @@ import { AuthContext } from './AuthContext';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const { setUser } = useContext(AuthContext);
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
   e.preventDefault();
+  setError('');
   try {
     const res = await fetch('http://localhost:8000/login', {
       method: 'POST',                        
@@ -22,16 +24,15 @@ const Login = () => {
     });
 
     if (!res.ok) {
-      const { error } = await res.json();
-      console.error('Login fallido:', error);
-      return;
+      const { error: msg } = await res.json();
+      return setError(msg);                        
     }
     const { user } = await res.json();
     setUser(user);
     console.log('Login exitoso');
     navigate('/');
   } catch (err) {
-    console.error('Error de red:', err);
+    setError(msg)
   }};
 
   return (
@@ -70,6 +71,12 @@ const Login = () => {
             Entrar
           </button>
         </form>
+
+        {error && (
+          <div className="mb-4 p-2 bg-red-100 text-red-700 rounded">
+            {error}
+          </div>
+        )}
         <p className="mt-4 text-center text-gray-600">
           ¿No tienes cuenta?{' '}
           <Link to="/signup" className="text-blue-600 hover:underline">

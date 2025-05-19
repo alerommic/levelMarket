@@ -4,11 +4,11 @@ import CartIcon from "./assets/CartIcon";
 import UserIcon from "./assets/UserIcon";
 import GameIcon from "./assets/GameIcon";
 import SearchIcon from "./assets/SearchIcon";
-import useCart from './useCart';
+import { CartContext } from './CartContext';
 import { AuthContext } from './AuthContext';
 
 const NavBar = () => {
-  const { cart, removeItem, clearCart } = useCart();
+  const { cart, removeItem, clearCart } = useContext(CartContext);
   const [userOpen, setUserOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const userRef = useRef();
@@ -98,7 +98,7 @@ const NavBar = () => {
         <CartIcon />
         </button>
         {cartOpen && (
-                <div className="absolute right-0 mt-2 w-100 bg-white border rounded z-10">
+                <div className="absolute right-0 mt-2 w-1000 bg-white border rounded z-10">
                   {cart.length === 0 ? (
                 <p className="p-4 text-center text-gray-500">Carrito vacío</p>
               ) : (
@@ -107,9 +107,10 @@ const NavBar = () => {
                     {cart.map(item => (
                       <li
                         key={item.gameid}
-                        className="flex justify-between items-center px-4 py-2 hover:bg-gray-100"
+                        className="flex flex-col justify-between items-center px-5 py-2 hover:bg-gray-100"
                       >
-                        <span className="truncate">{item.name} | {item.quantity}</span>
+                        <span className="truncate">{item.name} </span>
+                        <span truncate>Cantidad: {item.quantity}</span>
                         <button
                           onClick={() => removeItem(item.gameid)}
                           className="text-red-500 hover:text-red-700"
