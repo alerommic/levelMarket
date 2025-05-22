@@ -27,8 +27,8 @@ const register = async (req, res) => {
     // Responder sin la contraseña
     res.status(201).json({ user: result.rows[0] });
   } catch (err) {
-    console.error('Error en el register:', err);
-    res.status(500).json({ error: 'Error interno en el servidor' });
+    console.error('Error en el registro:', err);
+    res.status(500).json({ error: 'Error del servidor' });
   }
 };
 
@@ -62,7 +62,7 @@ const login = async (req, res) => {
     return res.json({ user: req.session.user });
   } catch (err) {
     console.error('Error en el login:', err);
-    return res.status(500).json({ error: 'Error interno del servidor' });
+    return res.status(500).json({ error: 'Error del servidor' });
   }
 };
 

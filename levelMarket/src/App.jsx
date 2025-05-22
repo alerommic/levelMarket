@@ -15,6 +15,8 @@ import AdminLayout from './AdminLayout'
 import AdminHome from './AdminHome'
 import AdminUsers from './AdminUsers'
 import AdminGames from './AdminGames'
+import AdminGamesCreate from './AdminGamesCreate';
+import AdminGamesEdit from './AdminGamesEdit'
 import { AuthProvider } from './AuthContext'
 import { CartProvider } from './CartContext'
 function App() {
@@ -48,6 +50,8 @@ function App() {
           <Route element={<AdminLayout />}>
             <Route index element={<AdminHome />} />
             <Route path="games" element={<AdminGames />} />
+            <Route path="games/:id/edit" element={<AdminGamesEdit />} />
+            <Route path="games/create" element={<AdminGamesCreate />} />
             <Route path="users"  element={<AdminUsers />} />
           </Route>
           </Route>
