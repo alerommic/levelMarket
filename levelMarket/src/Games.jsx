@@ -1,8 +1,10 @@
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
+import { CartContext } from './CartContext';
 const Games = (props) => {
   const gameList = props.games
+  const { addItem } = useContext(CartContext);
   return ( 
     <>
     {gameList.map((game)=>{
@@ -25,6 +27,7 @@ const Games = (props) => {
             {game.price}€
           </p>
           <button 
+              onClick={() => addItem(game)}
               type="button"
               className="flex self-center rounded bg-neutral-900 px-6 pb-2 pt-3 
               text-xs font-medium uppercase leading-normal text-neutral-50 shadow-dark-3 
@@ -33,7 +36,7 @@ const Games = (props) => {
             active:bg-neutral-900 active:shadow-dark-2 motion-reduce:transition-none
             dark:shadow-black/30 dark:hover:shadow-dark-strong 
               dark:focus:shadow-dark-strong dark:active:shadow-dark-strong">
-              Comprar
+              Añadir al carrito
             </button>
         </div>
       </div>

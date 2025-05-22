@@ -93,20 +93,20 @@ function AdminProductEdit() {
               name="name"
               value={form.name}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400"
               required
             />
           </div>
 
           <div>
-            <label className="block text-gray-700">Precio (€/unidad)</label>
+            <label className="block text-gray-700">Precio</label>
             <input
               name="price"
               type="number"
               step="0.01"
               value={form.price}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400"
               required
             />
           </div>
@@ -118,7 +118,7 @@ function AdminProductEdit() {
               type="date"
               value={form.releaseDate}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400"
             />
           </div>
 
@@ -128,7 +128,7 @@ function AdminProductEdit() {
               name="genre"
               value={form.genre}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400"
             >
               <option value="Aventura">Aventura</option>
               <option value="Acción">Acción</option>
@@ -142,7 +142,7 @@ function AdminProductEdit() {
               name="platform"
               value={form.platform}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400"
             >
               <option value="PlayStation">PlayStation</option>
               <option value="PC">PC</option>
@@ -170,7 +170,7 @@ function AdminProductEdit() {
               value={form.imageurl}
               onChange={handleChange}
               placeholder="url de la imagen"
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400"
             />
           </div>
 

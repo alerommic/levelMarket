@@ -54,7 +54,7 @@ const SignUp = () => {
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400"
               placeholder="Introduce tu usuario"
               required
             />
@@ -66,7 +66,7 @@ const SignUp = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400"
               placeholder="Introduce tu email"
               required
             />
@@ -78,7 +78,7 @@ const SignUp = () => {
               id="fullName"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400"
               placeholder="Introduce tu nombre completo"
             />
           </div>
@@ -89,7 +89,7 @@ const SignUp = () => {
               id="address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-400"
               placeholder="Introduce tu dirección"
             />
           </div>
