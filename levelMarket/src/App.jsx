@@ -8,6 +8,7 @@ import Footer from './Footer'
 import SignUp from './SignUp'
 import Admin from './AdminHome'
 import Profile from './profile'
+import EditProfile from'./EditProfile'
 import Orders from './Orders'
 import GameDetail from './GameDetail'
 import AdminGuard from './AdminGuard'
@@ -42,17 +43,18 @@ function App() {
         <Route path="/SignUp" element={<SignUp/>}/>
         
         <Route path="/profile" element={<Profile/>}/>
+        <Route path="/profile/edit" element={<EditProfile />}/>
 
         <Route path="/orders" element={<Orders/>}/>
 
 
-        <Route path="/admin" element={<AdminGuard />}>
+        <Route path="/admin" element={<AdminGuard/>}>
           <Route element={<AdminLayout />}>
-            <Route index element={<AdminHome />} />
-            <Route path="games" element={<AdminGames />} />
-            <Route path="games/:id/edit" element={<AdminGamesEdit />} />
-            <Route path="games/create" element={<AdminGamesCreate />} />
-            <Route path="users"  element={<AdminUsers />} />
+            <Route index element={<AdminHome />}/>
+            <Route path="games" element={<AdminGames/>}/>
+            <Route path="games/:id/edit" element={<AdminGamesEdit/>}/>
+            <Route path="games/create" element={<AdminGamesCreate/>}/>
+            <Route path="users"  element={<AdminUsers />}/>
           </Route>
           </Route>
       </Routes>

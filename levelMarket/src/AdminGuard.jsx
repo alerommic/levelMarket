@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { AuthContext }      from './AuthContext';
 import Loading from './assets/Loading';
 
-export default function AdminGuard() {
+const AdminGuard = () => {
   const { user, loading } = useContext(AuthContext);
 
   //Mientras carga la sesion no redirige
@@ -18,3 +18,5 @@ export default function AdminGuard() {
 
   return <Outlet />;
 }
+
+export default AdminGuard

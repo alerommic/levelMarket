@@ -110,7 +110,7 @@ const NavBar = () => {
                         className="flex flex-col justify-between items-center px-5 py-2 hover:bg-gray-100"
                       >
                         <span className="truncate">{item.name} </span>
-                        <span truncate>Cantidad: {item.quantity}</span>
+                        <span>Cantidad: {item.quantity}</span>
                         <button
                           onClick={() => removeItem(item.gameid)}
                           className="text-red-500 hover:text-red-700"

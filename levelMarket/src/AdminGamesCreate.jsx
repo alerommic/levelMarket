@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from './assets/Loading';
 
-export default function AdminGamesCreate() {
+function AdminGamesCreate() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
@@ -166,3 +166,5 @@ export default function AdminGamesCreate() {
     </div>
   );
 }
+
+export default AdminGamesCreate;

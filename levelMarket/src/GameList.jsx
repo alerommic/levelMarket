@@ -33,9 +33,14 @@ const GameList = () => {
   const filteredGames = filterGames(games)
   return (
     <>
-    <Header/>
+    <Header className="bg-gradient-to-r from-neutral-600 to-neutral-400"/>
 
-    <div className="flex flex-wrap gap-4 p-4 bg-white shadow rounded mx-4 sm:mx-8">
+
+      {error && <div className="align-middle">{error}</div>}
+      {isPending && <Loading/>}
+      {gameList && 
+      <>
+      <div className="flex flex-wrap gap-4 p-4 bg-white shadow rounded mx-4 sm:mx-8 items-center justify-center">
         <select
           name="genre"
           value={filters.genre}
@@ -80,12 +85,12 @@ const GameList = () => {
           min="0"
         />
       </div>
-
-<div className="m-4 gap-10 sm:m-8 p-4 sm:p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {error && <div className="align-middle">{error}</div>}
-      {isPending && <Loading/>}
-      {gameList && <Games games={filteredGames}></Games>}
-    </div>
+      <div className="m-4 to-neutral-400 gap-10 sm:m-8 p-4 sm:p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <Games games={filteredGames}></Games>
+      </div>
+      </>}
+      
+    
     </>
   );
 }

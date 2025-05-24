@@ -15,7 +15,7 @@ const getGameList = async (req, res) => {
     res.json(result.rows);
   } catch (error) {
     console.error("Error al obtener la lista de juegos:", error.message);
-    res.status(500).json({ error: "Error en el servodir servidor" });
+    res.status(500).json({ error: "Error en el servidor" });
   }
 };
 
@@ -37,7 +37,7 @@ const getGameById = async (req, res) => {
     res.json(result.rows[0]);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Error del servidor' });
+    res.status(500).json({ error: 'Error en el servidor' });
   }
 };
 
@@ -63,7 +63,7 @@ const deleteGame = async (req, res) => {
     return res.status(204).end();
   } catch (error) {
     console.error('Error al borrar el juego', error.message);
-    return res.status(500).json({ error: 'Error del servidor' });
+    return res.status(500).json({ error: 'Error en el servidor' });
   }
 };
 
@@ -90,7 +90,7 @@ const updateGame = async (req, res) => {
       client.release();
       return res.status(404).json({ error: 'Juego no encontrado' });
     }
-    // Gestionar la imagen
+    // Borra la imagen si tenia una y inserta la nueva
     if (imageurl) {
       await client.query('DELETE FROM images WHERE gameid = $1', [id]);
       await client.query(
@@ -107,7 +107,7 @@ const updateGame = async (req, res) => {
     await client.query('ROLLBACK');
     client.release();
     console.error('Error al actualizar juego:', error.message);
-    res.status(500).json({ error: 'Error del servidor' });
+    res.status(500).json({ error: 'Error en el servidor' });
   }
 };
 
@@ -142,7 +142,7 @@ const createGame = async (req, res) => {
   } catch (error) {
     await client.query('ROLLBACK');
     console.error('Error al crear juego:', error.message);
-    res.status(500).json({ error: 'Error del servidor' });
+    res.status(500).json({ error: 'Error en el servidor' });
   } finally {
     client.release();
   }

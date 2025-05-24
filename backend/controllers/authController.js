@@ -76,13 +76,33 @@ const logout = (req, res) => {
   
 };
 
-const getMe = (req, res) => {
-  if (req.session.user) {
-    // Devuelve la info del usuario
-    return res.json({ loggedIn: true, user: req.session.user });
+const getMe = async (req, res) => {
+  if (!req.session.user) {
+    return res.status(401).json({ error: 'No autorizado' });
   }
-  // Si no hay sesión activa
-  return res.status(401).json({ loggedIn: false });
+  const userId = req.session.user.id;
+  try {
+    const { rows } = await pool.query(
+      `SELECT 
+        userid,
+        username,
+        email,
+        fullname,
+        address,
+        is_admin
+      FROM users
+      WHERE userid = $1`,
+      [userId]
+    );
+    if (!rows[0]) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+    res.json({ user: rows[0] });
+  } catch (err) {
+    console.error('Error en /me:', err.message);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
 };
+
 
 module.exports = { register, login, logout, getMe };
