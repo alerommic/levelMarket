@@ -69,12 +69,6 @@ const Users = (props) => {
       </table>
       
     </div>
-    <div><Link
-                  to={`/admin/games/create`}
-                  className="text-neutral-600 hover:underline"
-                >
-                  Crear
-                </Link></div>
     </>);
 }
 //sin los prototypes da error
