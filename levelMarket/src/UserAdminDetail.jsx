@@ -69,6 +69,7 @@ const Users = (props) => {
       </table>
       
     </div>
+
     </>);
 }
 //sin los prototypes da error
