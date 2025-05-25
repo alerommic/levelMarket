@@ -20,4 +20,4 @@ router.get('/userList', getUserList);
 
 router.delete('/userDelete/:id', deleteUser)
 
-module.exports = router; 
+module.exports = router;

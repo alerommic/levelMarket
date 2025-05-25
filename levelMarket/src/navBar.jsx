@@ -131,7 +131,7 @@ const NavBar = () => {
                     <button
                       onClick={() => {
                         setCartOpen(false);
-                        navigate('/Cart');
+                        navigate('/cart');
                       }}
                       className="bg-neutral-900  text-white px-3 py-1 rounded hover:bg-neutral-700"
                     >

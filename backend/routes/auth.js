@@ -18,6 +18,6 @@ router.get('/me', requireLogin, getMe);
 
 //editar usuario (el mismo)
 
-router.put('/updateUser',   requireLogin, updateUser);
+router.put('/updateUser', requireLogin, updateUser);
 
 module.exports = router;

@@ -22,6 +22,11 @@ function AdminLayout() {
           >
             Usuarios
           </NavLink>
+          <NavLink to="/admin/orders"
+            className={({isActive})=> isActive?'font-bold':''}
+          >
+            Pedidos
+          </NavLink>
         </nav>
       </aside>
       <main className="flex-1 bg-gray-100 p-6">

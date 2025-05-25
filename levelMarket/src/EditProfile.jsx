@@ -4,7 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import Loading from './assets/Loading';
 
 export default function EditProfile() {
-  const { user, loading } = useContext(AuthContext);
+  const { user, setUser, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({
     username: '',
@@ -47,6 +47,10 @@ export default function EditProfile() {
         const { error } = await res.json();
         throw new Error(error || 'Error al actualizar');
       }
+      const { user: updatedUser } = await res.json();
+      // Actualiza el perfil al momento
+      setUser(updatedUser);
+
       navigate('/profile');
     } catch (err) {
       setError(err.message);

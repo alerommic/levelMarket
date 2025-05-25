@@ -49,7 +49,7 @@ const updateUser = async (req, res) => {
   try {
     const result = await pool.query(
       `UPDATE users
-          SET username=$1, email=$2, fullname=$3, address=$4
+        SET username=$1, email=$2, fullname=$3, address=$4
         WHERE userid=$5
         RETURNING userid, username, email, fullname, address, is_admin`,
       [username, email, fullname, address, user.id]
@@ -57,7 +57,7 @@ const updateUser = async (req, res) => {
     res.json({ user: result.rows[0] });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Error interno' });
+    res.status(500).json({ error: 'Error en el servidor' });
   }
 };
 

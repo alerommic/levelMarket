@@ -7,6 +7,8 @@ import LogIn from './LogIn'
 import Footer from './Footer'
 import SignUp from './SignUp'
 import Admin from './AdminHome'
+import Cart from './Cart'
+import Checkout from './Checkout'
 import Profile from './profile'
 import EditProfile from'./EditProfile'
 import Orders from './Orders'
@@ -36,8 +38,9 @@ function App() {
         <Route path="/GameList" element={<GameList/>}/>
         <Route path="/GameList/:id" element={<GameDetail/>}/>
         
-        
-        
+        <Route path="cart" element={<Cart/>}/>
+        <Route path="checkout" element={<Checkout/>}/>
+
         <Route path="/LogIn" element={<LogIn/>}/>
         
         <Route path="/SignUp" element={<SignUp/>}/>
