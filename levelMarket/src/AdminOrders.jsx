@@ -47,7 +47,7 @@ export default function AdminOrders() {
   const handleDeleteOrder = async (orderId) => {
     if (!window.confirm('¿Eliminar este pedido definitivamente?')) return;
     try {
-      const res = await fetch(`levelmarket-production.up.railway.app/admin/orders/${orderId}`, {
+      const res = await fetch(`${API_BASE}/admin/orders/${orderId}`, {
         method: 'DELETE',
         credentials: 'include'
       });
