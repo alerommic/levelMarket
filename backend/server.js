@@ -12,7 +12,8 @@ const orderRoutes = require('./routes/order');
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://level-market.vercel.app"
+  "https://level-market.vercel.app",
+  "https://level-market-alerommics-projects.vercel.app"
 ];
 
 app.use(cors({
