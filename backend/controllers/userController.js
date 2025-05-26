@@ -21,25 +21,50 @@ const getUserList = async (req, res) => {
 const deleteUser = async (req, res) => {
   const { id } = req.params;
   console.log('DELETE /admin/userDelete, id=', id);
-  try {
     const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+
+    // Borra los detalles de pedido
+    const delDetails = await client.query(
+      `DELETE FROM orderdetails 
+        WHERE orderid IN (
+          SELECT orderid FROM orders WHERE userid = $1
+        )`,
+      [userid]
+    );
+    console.log('OrderDetails borrados:', delDetails.rowCount);
+
+    // Borra los pedidos
+    const delOrders = await client.query(
+      `DELETE FROM orders WHERE userid = $1`,
+      [userid]
+    );
+    console.log('Orders borrados:', delOrders.rowCount);
 
     // Borra el usuario
-    const result = await client.query(
-      'DELETE FROM users WHERE userid = $1 RETURNING *',
-      [id]
+    const delUser = await client.query(
+      `DELETE FROM users WHERE userid = $1 RETURNING *`,
+      [userid]
     );
-    client.release();
+    console.log('Usuarios borrados:', delUser.rowCount);
 
-    if (result.rowCount === 0) {
-      return res.status(404).json({ error: 'usuario no encontrado' });
+    if (delUser.rowCount === 0) {
+      await client.query('ROLLBACK');
+      return res.status(404).json({ error: 'Usuario no encontrado' });
     }
-    return res.status(204).end();
-  } catch (error) {
-    console.error('Error al borrar el usuario', error.message);
+
+    await client.query('COMMIT');
+    return res.sendStatus(204);
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error('Error al borrar el usuario:', err);
     return res.status(500).json({ error: 'Error en el servidor' });
+  } finally {
+    client.release();
   }
 };
+
 
 const updateUser = async (req, res) => {
   const user = req.session.user;
