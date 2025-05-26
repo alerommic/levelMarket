@@ -51,7 +51,7 @@ const Users = (props) => {
             <tr key={user.userid} className="border-b">
               <td className="py-2 px-4">{user.userid}</td>
               <td className="py-2 px-4">{user.username}</td>
-              <td className="py-2 px-4">{user.email}€</td>
+              <td className="py-2 px-4">{user.email}</td>
               <td className="py-2 px-4">{user.fullname}</td>
               <td className="py-2 px-4">{user.address}</td>
               <td className="py-2 px-4">{user.is_admin ? <p>Si</p> :<p>No</p>}</td>

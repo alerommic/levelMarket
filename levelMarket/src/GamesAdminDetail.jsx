@@ -42,7 +42,7 @@ const Games = (props) => {
             <th className="py-2 px-4 text-left">Genero</th>
             <th className="py-2 px-4 text-left">Plataforma</th>
             <th className="py-2 px-4 text-left">Stock</th>
-            <th className="py-2 px-4 text-left">Acciones</th>
+            <th className="py-2 px-4 text-center" colSpan={2} >Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -52,24 +52,26 @@ const Games = (props) => {
               <td className="py-2 px-4">{game.gameid}</td>
               <td className="py-2 px-4">{game.name}</td>
               <td className="py-2 px-4">{game.price}€</td>
-              <td className="py-2 px-4">{game.releaseDate}</td>
+              <td className="py-2 px-4">{new Date(game.releasedate).toLocaleDateString()}</td>
               <td className="py-2 px-4">{game.genre}</td>
               <td className="py-2 px-4">{game.platform}</td>
               <td className="py-2 px-4">{game.stock}</td>
-              <td className="py-2 px-4">
+              <td className="py-2 px-4 col-span-2">
                 <Link
                   to={`/admin/games/${game.gameid}/edit`}
                   className="text-neutral-600 hover:underline"
                 >
                   Editar
                 </Link>
-                <button
+                </td>
+              <td>
+              <button
                   onClick={() => handleDelete(game.gameid)}
                   className="text-red-600 hover:underline"
                 >
                   Borrar
                 </button>
-              </td>
+                </td>
             </tr>
           )})}
         </tbody>
@@ -90,10 +92,9 @@ Games.propTypes = {
     PropTypes.shape({
       gameid: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-      releaseDate: PropTypes.string,
+      releasedate: PropTypes.string,
       genre : PropTypes.string.isRequired,
       platform: PropTypes.string.isRequired,
-      price: PropTypes.string.isRequired,
       price: PropTypes.string.isRequired,
       imageurl: PropTypes.string
     })

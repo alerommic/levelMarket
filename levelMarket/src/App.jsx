@@ -18,6 +18,7 @@ import AdminLayout from './AdminLayout'
 import AdminHome from './AdminHome'
 import AdminUsers from './AdminUsers'
 import AdminGames from './AdminGames'
+import AdminOrders from './AdminOrders'
 import AdminGamesCreate from './AdminGamesCreate';
 import AdminGamesEdit from './AdminGamesEdit'
 import { AuthProvider } from './AuthContext'
@@ -58,6 +59,7 @@ function App() {
             <Route path="games/:id/edit" element={<AdminGamesEdit/>}/>
             <Route path="games/create" element={<AdminGamesCreate/>}/>
             <Route path="users"  element={<AdminUsers />}/>
+            <Route path="orders"  element={<AdminOrders />}/>
           </Route>
           </Route>
       </Routes>

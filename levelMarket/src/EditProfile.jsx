@@ -111,7 +111,7 @@ export default function EditProfile() {
             type="submit"
             className="w-full bg-neutral-600 text-white py-2 rounded-md hover:bg-neutral-700 transition"
           >
-            Editar perfil
+            Actualizar perfil
           </button>
         </form>
     </div>
