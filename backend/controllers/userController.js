@@ -19,8 +19,8 @@ const getUserList = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const { id } = req.params;
-  console.log('DELETE /admin/userDelete, id=', id);
+  const { userid } = req.params;
+  console.log('DELETE /admin/userDelete, id=', userid);
     const client = await pool.connect();
   try {
     await client.query('BEGIN');
