@@ -19,7 +19,7 @@ router.post('/games/new', createGame);
 
 router.get('/userList', getUserList);
 
-router.delete('/userDelete/:id', deleteUser)
+router.delete('/userDelete/:userid', deleteUser)
 
 //rutas de pedidos
 
