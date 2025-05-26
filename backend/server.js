@@ -29,13 +29,14 @@ app.use(express.json());
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  proxy: true, 
   saveUninitialized: false,
-  cookie: { maxAge: 24 * 60 * 60 * 1000 },
-  sameSite: 'none',
-  secure: true
+  proxy: true,
+  cookie: {
+    sameSite: 'none',                     
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: true                         
+  }
 }));
-
 app.use('/', gamesRoutes);
 app.use('/', authRoutes);
 app.use('/admin', adminRoutes);
