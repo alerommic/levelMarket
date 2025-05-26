@@ -21,25 +21,47 @@ const getUserList = async (req, res) => {
 const deleteUser = async (req, res) => {
   const { id } = req.params;
   console.log('DELETE /admin/userDelete, id=', id);
+  const client = await pool.connect();
   try {
-    const client = await pool.connect();
+    await client.query('BEGIN');
 
-    // Borra el usuario
-    const result = await client.query(
-      'DELETE FROM users WHERE userid = $1 RETURNING *',
-      [id]
+    // Borrar los orderDetails de los pedidos deñ usuario
+    await client.query(
+      `DELETE FROM OrderDetails 
+        WHERE OrderID IN (
+          SELECT OrderID FROM Orders WHERE UserID = $1
+        )`,
+      [userid]
     );
-    client.release();
+
+    // Borrar todos los Orders de ese usuario
+    await client.query(
+      `DELETE FROM Orders WHERE UserID = $1`,
+      [userid]
+    );
+
+    // borrar el Usuario
+    const result = await client.query(
+      `DELETE FROM Users WHERE UserID = $1 RETURNING *`,
+      [userid]
+    );
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ error: 'usuario no encontrado' });
+      await client.query('ROLLBACK');
+      return res.status(404).json({ error: 'Usuario no encontrado' });
     }
-    return res.status(204).end();
-  } catch (error) {
-    console.error('Error al borrar el usuario', error.message);
+
+    await client.query('COMMIT');
+    return res.sendStatus(204);
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error('Error al borrar el usuario:', err);
     return res.status(500).json({ error: 'Error en el servidor' });
+  } finally {
+    client.release();
   }
 };
+
 
 const updateUser = async (req, res) => {
   const user = req.session.user;
