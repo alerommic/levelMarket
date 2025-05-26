@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Loading from './assets/Loading';
 import { AuthContext } from './AuthContext';
 import { Navigate } from 'react-router-dom';
+import API_BASE from './config';
 
 export default function Orders() {
   const { user, loading } = useContext(AuthContext);
@@ -11,7 +12,7 @@ export default function Orders() {
 
   useEffect(() => {
     if (loading || !user) return;
-    fetch('http://localhost:8000/orders', { credentials: 'include' })
+    fetch(`${API_BASE}/orders`, { credentials: 'include' })
       .then(res => {
         if (!res.ok) throw new Error('No autorizado o error al cargar pedidos');
         return res.json();

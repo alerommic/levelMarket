@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom';
 import useFetch from './useFetch';
 import { useState, useEffect } from 'react';
 import Loading from './assets/Loading';
+import API_BASE from './config';
+
 const Home = () => {
-  const {data : gameList = [], isPending, error} = useFetch("http://localhost:8000/GameList");
+  const {data : gameList = [], isPending, error} = useFetch(`${API_BASE}/GameList`);
   const [currentSlide, setCurrentSlide] = useState(0);
 
 

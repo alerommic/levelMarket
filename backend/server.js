@@ -9,8 +9,14 @@ const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 const checkoutRoutes = require('./routes/checkout');
 const orderRoutes = require('./routes/order');
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://level-market.vercel.app"
+];
+
 app.use(cors({
-  origin: 'http://localhost:5173',    // front
+  origin: allowedOrigins,    // front
   methods: ['GET','POST','PUT','DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true                   // para permitir cookies

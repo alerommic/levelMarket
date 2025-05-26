@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from './AuthContext';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Loading from './assets/Loading';
+import API_BASE from './config';
 
 export default function EditProfile() {
   const { user, setUser, loading } = useContext(AuthContext);
@@ -37,7 +38,7 @@ export default function EditProfile() {
     e.preventDefault();
     setError('');
     try {
-      const res = await fetch('http://localhost:8000/updateUser', {
+      const res = await fetch(`${API_BASE}/updateUser`, {
         method: 'PUT',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

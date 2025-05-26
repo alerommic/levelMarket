@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from './assets/Loading';
+import API_BASE from './config'
 
 function AdminGamesCreate() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ function AdminGamesCreate() {
     setError('');
     setSubmit(true);
     try {
-      const res = await fetch('http://localhost:8000/admin/games/new', {
+      const res = await fetch(`${API_BASE}/admin/games/new`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

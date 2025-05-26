@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Loading from './assets/Loading';
+import API_BASE from './config'
 
 function AdminProductEdit() {
   const { id } = useParams();
@@ -18,7 +19,7 @@ function AdminProductEdit() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:8000/GameList/${id}`, { credentials: 'include' })
+    fetch(`${API_BASE}/GameList/${id}`, { credentials: 'include' })
       .then(res => {
         if (!res.ok) throw new Error('Juego no encontrado');
         return res.json();
@@ -47,7 +48,7 @@ function AdminProductEdit() {
     e.preventDefault();
     setError('');
     try {
-      const res = await fetch(`http://localhost:8000/admin/games/${id}/edit`, {
+      const res = await fetch(`${API_BASE}/admin/games/${id}/edit`, {
         method: 'PUT',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

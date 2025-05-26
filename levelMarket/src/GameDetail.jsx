@@ -3,14 +3,14 @@ import { useParams, Link } from 'react-router-dom';
 import useFetch from './useFetch';
 import Loading from './assets/Loading';
 import { CartContext } from './CartContext';
-
+import API_BASE from './config';
 
 export default function GameDetail() {
   // Lee el id del url
   const { id } = useParams();
 
   // 2) le pasa el id del url
-  const { data: game, isPending, error } = useFetch(`http://localhost:8000/GameList/${id}`);
+  const { data: game, isPending, error } = useFetch(`${API_BASE}/GameList/${id}`);
 
   const { addItem } = useContext(CartContext);
 

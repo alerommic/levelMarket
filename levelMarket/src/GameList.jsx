@@ -6,10 +6,12 @@ import Header from "./Header"
 import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
 import { useSearchParams } from 'react-router-dom';
+import API_BASE from './config'
+
 const GameList = () => {
   const [searchParams] = useSearchParams();
   const nameFilter = searchParams.get('name') || '';
-  const {data : gameList = [], isPending, error} = useFetch("http://localhost:8000/GameList")
+  const {data : gameList = [], isPending, error} = useFetch(`${API_BASE}/GameList`)
   const [filters, setFilters] = useState ({
       genre: "all",
       platform: "all",

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { CartContext } from './CartContext';
 import Loading from './assets/Loading';
+import API_BASE from './config';
 
 export default function Checkout() {
   const { cart, clearCart } = useContext(CartContext);
@@ -12,7 +13,7 @@ export default function Checkout() {
     setIsPending(true);
     setMessage('');
     try {
-      const res = await fetch('http://localhost:8000/checkout', {
+      const res = await fetch(`${API_BASE}/checkout`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

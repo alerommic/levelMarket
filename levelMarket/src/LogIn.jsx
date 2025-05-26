@@ -1,8 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
+import API_BASE from './config';
 
 const Login = () => {
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -13,7 +15,7 @@ const Login = () => {
   e.preventDefault();
   setError('');
   try {
-    const res = await fetch('http://localhost:8000/login', {
+    const res = await fetch(`${API_BASE}/login`, {
       method: 'POST',                        
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',                // cookies de sesión
@@ -31,6 +33,7 @@ const Login = () => {
     setUser(user);
     console.log('Login exitoso');
     navigate('/');
+    
   } catch (err) {
     setError(msg)
   }};

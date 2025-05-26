@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from './AuthContext';
 import Loading from './assets/Loading';
+import API_BASE from './config'
 
 export default function AdminOrders() {
   const { user, loading } = useContext(AuthContext);
@@ -11,7 +12,7 @@ export default function AdminOrders() {
   useEffect(() => {
     if (!user.is_admin) return;
 
-    fetch('http://localhost:8000/admin/orders', { credentials: 'include' })
+    fetch(`${API_BASE}/admin/orders`, { credentials: 'include' })
       .then(res => {
         if (!res.ok) throw new Error('Error cargando pedidos');
         return res.json();
@@ -23,7 +24,7 @@ export default function AdminOrders() {
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
-      const res = await fetch(`http://localhost:8000/admin/orders/${orderId}/status`, {
+      const res = await fetch(`${API_BASE}/admin/orders/${orderId}/status`, {
         method: 'PUT',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -46,7 +47,7 @@ export default function AdminOrders() {
   const handleDeleteOrder = async (orderId) => {
     if (!window.confirm('¿Eliminar este pedido definitivamente?')) return;
     try {
-      const res = await fetch(`http://localhost:8000/admin/orders/${orderId}`, {
+      const res = await fetch(`levelmarket-production.up.railway.app/admin/orders/${orderId}`, {
         method: 'DELETE',
         credentials: 'include'
       });

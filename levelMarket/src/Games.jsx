@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { CartContext } from './CartContext';
+
 const Games = (props) => {
   const gameList = props.games
   const { addItem } = useContext(CartContext);

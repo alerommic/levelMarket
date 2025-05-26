@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Loading from './assets/Loading'
 import UserAdminDetail from './UserAdminDetail'
-
+import API_BASE from './config'
 
 const AdminUsers = () =>{
 
@@ -10,7 +10,7 @@ const [isPending, setIsPending] = useState(true);
 const [error, setError] = useState(null);
   
   useEffect(() => {
-    fetch('http://localhost:8000/admin/userList', {credentials: 'include'})
+    fetch(`${API_BASE}/admin/userList`, {credentials: 'include'})
       .then((res) => {
         if (!res.ok) {
           throw Error("Fetch failure");

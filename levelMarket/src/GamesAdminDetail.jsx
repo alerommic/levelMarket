@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import API_BASE from './config';
 
 const Games = (props) => {
   const gameList = props.games
@@ -14,7 +15,7 @@ const Games = (props) => {
   const handleDelete = async (gameid) => {
     if (!window.confirm('Seguro que quieres eliminar este juego?')) return;
     try {
-      const res = await fetch(`http://localhost:8000/admin/gameDelete/${gameid}`, {
+      const res = await fetch(`${API_BASE}/admin/gameDelete/${gameid}`, {
         method: 'DELETE',
         credentials: 'include'
       });

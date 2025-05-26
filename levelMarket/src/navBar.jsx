@@ -6,6 +6,7 @@ import GameIcon from "./assets/GameIcon";
 import SearchIcon from "./assets/SearchIcon";
 import { CartContext } from './CartContext';
 import { AuthContext } from './AuthContext';
+import API_BASE from './config';
 
 const NavBar = () => {
   const { cart, removeItem, clearCart } = useContext(CartContext);
@@ -34,7 +35,7 @@ const NavBar = () => {
   }, []);
 
   const handleLogout = async () => {
-    await fetch('http://localhost:8000/logout', {
+    await fetch(`${API_BASE}/logout`, {
       method: 'POST',
       credentials: 'include'
     });

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import API_BASE from './config';
 
 const Users = (props) => {
   const userList = props.users;
@@ -15,7 +16,7 @@ const Users = (props) => {
     if (!window.confirm('Seguro que quieres eliminar este usuario?')) return;
     console.log(userid);
     try {
-      const res = await fetch(`http://localhost:8000/admin/userDelete/${userid}`, {
+      const res = await fetch(`${API_BASE}/admin/userDelete/${userid}`, {
         method: 'DELETE',
         credentials: 'include'
       });

@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from './AuthContext';
 import { Navigate, useNavigate } from 'react-router-dom';
 import Loading from './assets/Loading';
+import API_BASE from './config';
 
 export default function ChangePassword() {
   const { user, loading } = useContext(AuthContext);
@@ -29,7 +30,7 @@ export default function ChangePassword() {
     }
     setPending(true);
     try {
-      const res = await fetch('http://localhost:8000/profile/password', {
+      const res = await fetch(`${API_BASE}/profile/password`, {
         method: 'PUT',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -52,7 +53,7 @@ export default function ChangePassword() {
 
   if (loading) return <Loading />;
   if (!user)   return <Navigate to="/login" replace />;
-  
+
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow mt-8">
       <h2 className="text-2xl font-bold mb-4">Cambiar Contraseña</h2>
