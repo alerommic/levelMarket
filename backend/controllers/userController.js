@@ -20,34 +20,30 @@ const getUserList = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   const { userid } = req.params;
-  console.log('DELETE /admin/userDelete, id=', userid);
     const client = await pool.connect();
   try {
     await client.query('BEGIN');
 
     // Borra los detalles de pedido
-    const delDetails = await client.query(
+    await client.query(
       `DELETE FROM orderdetails 
         WHERE orderid IN (
           SELECT orderid FROM orders WHERE userid = $1
         )`,
       [userid]
     );
-    console.log('OrderDetails borrados:', delDetails.rowCount);
 
     // Borra los pedidos
-    const delOrders = await client.query(
+    await client.query(
       `DELETE FROM orders WHERE userid = $1`,
       [userid]
     );
-    console.log('Orders borrados:', delOrders.rowCount);
 
     // Borra el usuario
     const delUser = await client.query(
       `DELETE FROM users WHERE userid = $1 RETURNING *`,
       [userid]
     );
-    console.log('Usuarios borrados:', delUser.rowCount);
 
     if (delUser.rowCount === 0) {
       await client.query('ROLLBACK');
