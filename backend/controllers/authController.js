@@ -105,5 +105,46 @@ const getMe = async (req, res) => {
   }
 };
 
+const changePassword = async (req, res) => {
+  const userId = req.session.user?.id;
+  const { currentPassword, newPassword } = req.body;
+  if (!userId) return res.status(401).json({ error: 'No autorizado' });
 
-module.exports = { register, login, logout, getMe };
+  try {
+    const client = await pool.connect();
+    // obtiene el hash actual
+    const { rows } = await client.query(
+      'SELECT password FROM users WHERE userid = $1',
+      [userId]
+    );
+    client.release();
+    if (rows.length === 0) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+    const hash = rows[0].password;
+
+    // Valida la contraseña actual
+    const match = await bcrypt.compare(currentPassword, hash);
+    if (!match) {
+      return res.status(400).json({ error: 'Contraseña actual incorrecta' });
+    }
+
+    // Hashear la nueva contraseña
+    const newHash = await bcrypt.hash(newPassword, 10);
+
+    // Actualizar en la base de datos
+    await pool.query(
+      'UPDATE users SET password = $1 WHERE userid = $2',
+      [newHash, userId]
+    );
+
+    res.json({ message: 'Contraseña actualizada' });
+  } catch (err) {
+    console.error('Error al cambiar la contraseña:', err);
+    res.status(500).json({ error: 'Error en el servidor' });
+  }
+};
+
+
+
+module.exports = { register, login, logout, getMe, changePassword };

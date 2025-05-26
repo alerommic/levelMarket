@@ -11,6 +11,7 @@ import Cart from './Cart'
 import Checkout from './Checkout'
 import Profile from './profile'
 import EditProfile from'./EditProfile'
+import ChangePassword from './ChangePassword'
 import Orders from './Orders'
 import GameDetail from './GameDetail'
 import AdminGuard from './AdminGuard'
@@ -48,7 +49,7 @@ function App() {
         
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/profile/edit" element={<EditProfile />}/>
-
+        <Route path="/profile/password" element={<ChangePassword/>} />
         <Route path="/orders" element={<Orders/>}/>
 
 

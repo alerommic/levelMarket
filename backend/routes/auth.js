@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { register, login, logout ,getMe } = require('../controllers/authController');
+const { register, login, logout ,getMe, changePassword } = require('../controllers/authController');
 const { updateUser } = require('../controllers/userController')
 const requireLogin = require('../middlewares/requireLogin')
 
@@ -19,5 +19,7 @@ router.get('/me', requireLogin, getMe);
 //editar usuario (el mismo)
 
 router.put('/updateUser', requireLogin, updateUser);
+
+router.put('/profile/password', requireLogin, changePassword);
 
 module.exports = router;

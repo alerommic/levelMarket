@@ -68,7 +68,7 @@ const updateOrderStatus = async (req, res) => {
     if (!upd.rows.length) {
       throw new Error('Pedido no encontrado');
     }
-    // Si se completa, reduce el stock de los juegos
+    // Si el estado del pedido es Completed, reduce el stock de los juegos
     if (status === 'Completed') {
       await client.query(`
         UPDATE games
