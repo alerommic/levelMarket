@@ -4,9 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server": "nodemon server.js",
-    "client": "npm run dev --prefix ../levelMarket",
-    "build": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",

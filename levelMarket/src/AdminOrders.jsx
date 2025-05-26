@@ -105,15 +105,20 @@ export default function AdminOrders() {
                     <span className="text-gray-500">Completado</span>
                   )}
                   {order.status === 'Canceled' && (
-                    <span className="text-gray-500">Cancelado</span>
-                  )}
-                  {order.status === 'Canceled' && (
+                    <>
                     <button
                       onClick={() => handleDeleteOrder(order.orderid)}
                       className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
                     >
                       Eliminar
                     </button>
+                    <button
+                    onClick={() => handleStatusChange(order.orderid, 'Pending')}
+                    className="bg-yellow-600 text-white px-3 py-1 rounded hover:bg-yellow-700"
+                  >
+                    Pendiente
+                  </button>
+                  </>
                   )}
                 </td>
               </tr>

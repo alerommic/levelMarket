@@ -5,7 +5,6 @@ import Loading from './assets/Loading';
 const Home = () => {
   const {data : gameList = [], isPending, error} = useFetch("http://localhost:8000/GameList");
   const [currentSlide, setCurrentSlide] = useState(0);
-console.log(gameList)
 
 
 const CarruselGames = Array.isArray(gameList) ? gameList.slice(0, 4) : []

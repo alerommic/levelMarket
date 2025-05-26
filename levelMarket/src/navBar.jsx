@@ -15,6 +15,7 @@ const NavBar = () => {
   const cartRef = useRef();
   const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   // Comprueba estado de autenticación
   const { user, setUser } = useContext(AuthContext);
 
@@ -41,15 +42,26 @@ const NavBar = () => {
     navigate('/');
   };
 
+  const onSearch = e => {
+    e.preventDefault();
+    const q = searchTerm.trim();
+    if (q) {
+      navigate(`/GameList?name=${encodeURIComponent(q)}`);
+      setSearchTerm('');
+    }
+  };
+
   return (
     <nav className="flex sticky top-0 w-full bg-slate-50 shadow-md justify-between items-center px-6 py-4">
       <Link to="/"><h1 className="text-black text-xl font-bold">LevelMarket</h1></Link>
 
-      <form className="flex items-center" onSubmit={e => e.preventDefault()}>
+      <form className="flex items-center" onSubmit={onSearch}>
   <div className="hidden sm:flex items-center flex-1 mx-4">
         <input
           type="text"
           placeholder="Buscar..."
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
           className="flex-1 h-10 px-4 rounded-l-full border border-r-0 focus:outline-none"
         />
         <button
@@ -72,7 +84,10 @@ const NavBar = () => {
             autoFocus
             type="text"
             placeholder="Buscar..."
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
             className="flex-1 h-10 px-4 rounded-l-full border border-r-0 focus:outline-none"
+            onKeyDown={e => { if (e.key === 'Enter') onSearch(e) }}
           />
           <button
             className="flex items-center y justify-center h-10 w-10 rounded-r-full border border-l-0 bg-neutral-300 text-white"

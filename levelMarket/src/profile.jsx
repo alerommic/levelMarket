@@ -8,8 +8,11 @@ export default function Profile() {
   const { user, loading } = useContext(AuthContext);
 
   if (loading) return <Loading />;
+  
   if (!user)   return <Navigate to="/login" replace />;
+
   setUser(user);
+
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow mt-8">
       <h2 className="text-2xl font-bold mb-4">Mi Perfil</h2>
