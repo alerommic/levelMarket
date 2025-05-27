@@ -49,7 +49,7 @@ const CarruselGames = Array.isArray(gameList) ? gameList.slice(0, 4) : []
           {isPending && <div className="absolute z-20 right-10"><Loading /></div>}
           {CarruselGames && 
             <div className="relative overflow-visible">
-              <div className="overflow-hidden rounded-2xl h-120 w-80 ">
+              <div className="overflow-hidden rounded-2xl h-120 w-80 mx-auto">
                 <div 
                   className="flex transition-transform duration-500 ease-in-out"
                   style={{ transform: `translateX(-${currentSlide * 100}%)` }}
