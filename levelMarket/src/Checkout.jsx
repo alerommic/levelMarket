@@ -34,17 +34,20 @@ export default function Checkout() {
   if (isPending) return <Loading />;
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow mt-8">
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow mt-20 flex flex-col">
       <h2 className="text-2xl font-bold mb-4">Confirmar Pedido</h2>
       {message ? (
         <p className="text-green-600 mb-4">{message}</p>
       ) : (
+        <>
+        <p  className='mb-4'>Recibiras las instrucciones para realizar el pago en tu correo electronico</p>
         <button
           onClick={handlePay}
-          className="w-full bg-neutral-600 text-white py-2 rounded hover:bg-neutral-700 transition"
+          className=" min-w-10 justify-center bg-neutral-900 text-white py-2 rounded hover:bg-neutral-700 transition"
         >
-          Enviar Pedido y Recibir Instrucciones
+          Enviar Pedido
         </button>
+        </>
       )}
     </div>
   );

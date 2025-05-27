@@ -55,7 +55,7 @@ export default function ChangePassword() {
   if (!user)   return <Navigate to="/login" replace />;
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow mt-8">
+    <div className="max-w-md w-full mx-auto p-6 bg-white rounded-lg shadow mt-20 mb-20">
       <h2 className="text-2xl font-bold mb-4">Cambiar Contraseña</h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -95,7 +95,7 @@ export default function ChangePassword() {
         <button
           type="submit"
           disabled={pending}
-          className="w-full bg-neutral-600 text-white py-2 rounded hover:bg-neutral-700 transition disabled:opacity-50"
+          className="w-full bg-neutral-900 text-white py-2 rounded hover:bg-neutral-700 transition disabled:opacity-50"
         >
           {pending ? 'Cambiando...' : 'Cambiar Contraseña'}
         </button>

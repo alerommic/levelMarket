@@ -15,40 +15,63 @@ export default function GameDetail() {
   const { addItem } = useContext(CartContext);
 
   return (
-    <div> 
-      {error && <div className="align-middle">{error}</div>}
-      {isPending && <Loading/>}
-      {game && 
-      <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow">
-      <Link to="/GameList" className="text-neutral-600 hover:underline mb-4 inline-block">
-        &larr; Volver a la lista
-      </Link>
-      <h1 className="text-3xl font-bold mb-2">{game.name}</h1>
-
-      {game.imageurl && (
-            <img
-              src={game.imageurl}
-              alt={game.name}
-              className="w-50 h-auto rounded mb-4"
-            />
-          )}
-
-<p className="text-gray-600 mb-2">
-            Fecha de salida: {new Date(game.releasedate).toLocaleDateString()}
-          </p>
-          <p className="mb-2">Género: {game.genre}</p>
-          <p className="mb-2">Plataforma: {game.platform}</p>
-          <p className="mb-2">Stock: {game.stock}</p>
-          <p className="text-xl font-semibold mb-4">Precio: {game.price}€</p>
-
-          <button
-            onClick={() => addItem(game)}
-            className="bg-neutral-900 text-white px-4 py-2 rounded hover:bg-neutral-700  transition"
+    <div className="min-h-screen bg-gray-50 py-8">
+      {error && <div className="text-center text-red-500 mb-4">{error}</div>}
+      {isPending && <Loading />}
+      {game && (
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <Link
+            to="/GameList"
+            className="inline-block text-neutral-600 hover:underline mb-6 text-sm"
           >
-            Añadir al carrito
-          </button>
-
-      </div> }
+            &larr; Volver a la lista
+          </Link>
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row">
+            <div className="md:w-1/2">
+              <img
+                src={game.imageurl}
+                alt={game.name}
+                className="w-2/3 h-auto rounded-t-lg mx-auto object-cover"
+              />
+            </div>
+            <div className="md:w-1/2 p-6 flex flex-col justify-between">
+              <div>
+                <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800">
+                  {game.name}
+                </h1>
+                <p className="text-gray-600 mb-2">
+                  <span className="font-medium"><strong>Fecha de salida:</strong></span>{' '}
+                  {game.releasedate
+                    ? new Date(game.releasedate).toLocaleDateString()
+                    : '-'}
+                </p>
+                <p className="text-gray-600 mb-2">
+                  <span className="font-medium"><strong>Género:</strong></span> {game.genre}
+                </p>
+                <p className="text-gray-600 mb-2">
+                  <span className="font-medium"><strong>Plataforma:</strong></span> {game.platform}
+                </p>
+                <p className="text-gray-600 mb-4">
+                  <span className="font-medium"><strong>Stock:</strong></span> {game.stock}
+                </p>
+              </div>
+              <div className="mt-4">
+                <p className="text-xl sm:text-2xl font-semibold justify-center mb-4">
+                  {game.price}€
+                </p>
+                <button
+                  onClick={() => addItem(game)}
+                  className="w-full bg-neutral-900 text-white py-3 rounded-lg hover:bg-neutral-700 transition duration-200"
+                >
+                  Añadir al carrito
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+
+

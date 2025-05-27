@@ -97,14 +97,18 @@ const GameList = () => {
           />
         </div>
       </div>
-      <div className="m-4 to-neutral-400 gap-10 sm:m-8 p-4 sm:p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      <Games games={filteredGames}></Games>
-      </div>
+      <div className="m-4 sm:m-8 p-4 sm:p-8">
+            {filteredGames.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <Games games={filteredGames} />
+              </div>
+            ) : (
+              <p className="text-center text-gray-500 text-lg">No se han encontrado resultados.</p>
+            )}
+          </div>
       </>}
-      
-    
     </>
   );
-}
+};
 
 export default GameList;

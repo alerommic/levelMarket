@@ -28,15 +28,15 @@ const CarruselGames = Array.isArray(gameList) ? gameList.slice(0, 4) : []
   };
 
   return (
-    <div className="w-full bg-gradient-to-r from-neutral-600 to-neutral-400 text-white min-h-screen">
-      <section className="flex flex-col items-center justify-center text-center py-20 px-4">
+    <div className="w-full min-h-screen bg-gradient-to-br from-neutral-900 via-neutral-500 to-neutral-200 text-gray-100">
+      <section className="flex flex-col items-center justify-center text-center py-20 px-4 ">
         <h1 className="text-5xl font-extrabold mb-4">LevelMarket</h1>
         <p className="max-w-xl text-lg mb-8">
-          Tu tienda online de confianza
+          <strong>Tu tienda online de confianza</strong>
         </p>
         <Link to="/GameList">
         <button
-          className="bg-white text-neutral-600 font-semibold px-6 py-3 rounded-lg shadow hover:bg-gray-100 transition">
+          className="bg-white text-neutral-600 font-semibold px-6 py-4 rounded-lg shadow hover:bg-gray-100 transition">
           Explorar Juegos
         </button>
       </Link>
@@ -46,9 +46,9 @@ const CarruselGames = Array.isArray(gameList) ? gameList.slice(0, 4) : []
           <h2 className="text-4xl font-bold text-center mb-12">Juegos Destacados</h2>
           
           {error && <div className="align-middle">{error}</div>}
-          {isPending && <Loading/>}
+          {isPending && <div className="absolute z-20 right-10"><Loading /></div>}
           {CarruselGames && 
-            <div className="relative">
+            <div className="relative overflow-visible">
               <div className="overflow-hidden rounded-2xl h-120 w-80 ">
                 <div 
                   className="flex transition-transform duration-500 ease-in-out"
@@ -57,8 +57,8 @@ const CarruselGames = Array.isArray(gameList) ? gameList.slice(0, 4) : []
                   {CarruselGames.map((game) => (
                     <div key={game.gameid} className="w-full flex-shrink-0 relative">
                       <div className="flex items-center justify-center bg-gray-900 h-120 relative overflow-hidden">
-                        {/* Imagen del juego con aspect ratio preservado */}
                         <div className="relative h-110 w-80 mx-auto">
+                        <Link to={`/GameList/${game.gameid}`}>
                           <img 
                             src={game.imageurl || "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=600&fit=crop"} 
                             alt={game.name}
@@ -67,27 +67,27 @@ const CarruselGames = Array.isArray(gameList) ? gameList.slice(0, 4) : []
                               e.target.src = "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=600&fit=crop";
                             }}
                           />
-                          {/* Overlay gradient sutil */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-lg"></div>
+                          </Link>
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-lg pointer-events-none"></div>
                         </div>
-                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+                        <div className="absolute -bottom-6 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
                           <div className="max-w-4xl mx-auto text-center">
                             <div className="flex items-center justify-center gap-2 mb-2">
-                              <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                              <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
                                 {game.genre}
                               </span>
                               <span className="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
                                 {game.platform}
                               </span>
                             </div>
-                            <h3 className="text-3xl font-bold mb-2 text-white">{game.name}</h3>
+                            <h3 className="text-2xl font-bold mb-2 text-white">{game.name}</h3>
                             {game.releaseDate && (
                               <p className="text-gray-300 mb-3">
                                 Lanzamiento: {new Date(game.releaseDate).toLocaleDateString()}
                               </p>
                             )}
                             <div className="flex items-center justify-center gap-3 mb-4">
-                              <span className="text-2xl font-bold text-green-400">${game.price}</span>
+                              <span className="text-2xl font-bold text-green-400">{game.price}€</span>
                             </div>
                           </div>
                         </div>
@@ -100,7 +100,8 @@ const CarruselGames = Array.isArray(gameList) ? gameList.slice(0, 4) : []
               {/* Navigation arrows */}
               <button 
                 onClick={prevSlide}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 z-10"
+                className=" absolute top-1/2 left-2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 
+                text-white p-3 rounded-full transition-all duration-300 z-10 xl:-left-14"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -108,7 +109,8 @@ const CarruselGames = Array.isArray(gameList) ? gameList.slice(0, 4) : []
               </button>
               <button 
                 onClick={nextSlide}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all duration-300 z-10"
+                className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 
+                text-white p-3 rounded-full transition-all duration-300 z-10 xl:-right-14"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

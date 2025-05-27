@@ -31,7 +31,7 @@ function App() {
     <AuthProvider>
     <CartProvider>
     <Router>
-      <section className='self-center'>
+      <section className='self-center flex flex-col min-h-screen'>
       <NavBar></NavBar>
       <Routes>
         

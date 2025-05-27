@@ -53,7 +53,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="flex sticky top-0 w-full bg-slate-50 shadow-md justify-between items-center px-6 py-4">
+    <nav className="flex z-40 sticky top-0 w-full bg-slate-50 shadow-md justify-between items-center px-6 py-4">
       <Link to="/"><h1 className="text-black text-xl font-bold">LevelMarket</h1></Link>
 
       <form className="flex items-center" onSubmit={onSearch}>
@@ -66,7 +66,7 @@ const NavBar = () => {
           className="flex-1 h-10 px-4 rounded-l-full border border-r-0 focus:outline-none"
         />
         <button
-          className="flex items-center justify-center h-10 w-10 rounded-r-full border border-l-0 bg-neutral-300 text-white"
+          className="flex items-center justify-center h-10 w-10 rounded-r-full border border-l-0 bg-neutral-300 hover:bg-neutral-500 text-white"
         >
           <SearchIcon className="w-5 h-5" />
         </button>
@@ -99,7 +99,7 @@ const NavBar = () => {
             onClick={() => setSearchOpen(false)}
             className="flex items-center justify-center h-10 w-10  text-black"
           >
-            X
+            &times;
           </button>
         </div>
       )}
@@ -110,55 +110,57 @@ const NavBar = () => {
           <Link to="/GameList"><GameIcon /></Link>
         </li>
         <li className="relative" ref={cartRef}>
-        <button onClick={() => setCartOpen(o => !o)}>
-        <CartIcon />
-        </button>
-        {cartOpen && (
-                <div className="absolute right-0 mt-2 w-1000 bg-white border rounded z-10">
-                  {cart.length === 0 ? (
-                <p className="p-4 text-center text-gray-500">Carrito vacío</p>
-              ) : (
-                <>
-                  <ul>
-                    {cart.map(item => (
-                      <li
-                        key={item.gameid}
-                        className="flex flex-col justify-between items-center px-5 py-2 hover:bg-gray-100"
-                      >
-                        <span className="truncate">{item.name} </span>
-                        <span>Cantidad: {item.quantity}</span>
-                        <button
-                          onClick={() => removeItem(item.gameid)}
-                          className="text-red-500 hover:text-red-700"
-                          title="Eliminar"
-                        >
-                          &times;
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="border-t px-4 py-2 flex justify-between">
-                    <button
-                      onClick={clearCart}
-                      className="text-sm text-gray-600 hover:underline"
-                    >
-                      Vaciar carrito
-                    </button>
-                    <button
-                      onClick={() => {
-                        setCartOpen(false);
-                        navigate('/cart');
-                      }}
-                      className="bg-neutral-900  text-white px-3 py-1 rounded hover:bg-neutral-700"
-                    >
-                      Ver carrito
-                    </button>
-                  </div>
-                </>
-              )}
+  <button onClick={() => setCartOpen(o => !o)} className="p-2 hover:bg-gray-200 rounded-full transition">
+    <CartIcon />
+  </button>
+  {cartOpen && (
+    <div className="absolute right-0 mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+      {cart.length === 0 ? (
+        <p className="p-6 text-center text-gray-500">Carrito vacío</p>
+      ) : (
+        <>
+          <ul className="divide-y divide-gray-100">
+            {cart.map(item => (
+              <li
+                key={item.gameid}
+                className="flex items-center justify-between px-4 py-3 hover:bg-gray-50 transition"
+              >
+                <div className="flex items-center space-x-3">
+                  <span className="font-medium text-gray-800 truncate">{item.name}</span>
+                  <span className="text-sm text-gray-500">x{item.quantity}</span>
                 </div>
-              )}
-        </li>
+                <button
+                  onClick={() => removeItem(item.gameid)}
+                  className="text-red-500 hover:text-red-700 p-1"
+                  title="Eliminar"
+                >
+                  &times;
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className="border-t border-gray-200 px-4 py-3 flex justify-between">
+            <button
+              onClick={clearCart}
+              className="text-sm text-gray-600 hover:underline"
+            >
+              Vaciar carrito
+            </button>
+            <button
+              onClick={() => {
+                setCartOpen(false);
+                navigate('/cart');
+              }}
+              className="bg-neutral-900 text-white px-4 py-2 rounded-md hover:bg-neutral-700 transition"
+            >
+              Ver carrito
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  )}
+</li>
         <li className="relative" ref={userRef}>
           {user ? (
             <>

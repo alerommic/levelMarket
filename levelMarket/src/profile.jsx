@@ -31,21 +31,21 @@ export default function Profile() {
   setUser(user);
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow mt-20">
+    <div className="max-w-md w-full mx-auto p-6 bg-white rounded-lg shadow mt-20">
       <h2 className="text-2xl font-bold mb-4">Mi Perfil</h2>
       <p><strong>Usuario:</strong> {user.username}</p>
       <p><strong>Email:</strong>   {user.email}</p>
       <p><strong>Nombre:</strong>  {user.fullname || '-'}</p>
       <p><strong>Dirección:</strong> {user.address || '-'}</p>
 
-      <div className="mt-6 space-y-3 py-10 flex flex-col">
+      <div className="mt-2 space-y-4 py-10 flex flex-col">
         <Link to="/profile/edit">
-          <button className="w-full bg-neutral-600 text-white py-2 rounded hover:bg-neutral-700 transition">
+          <button className="w-full bg-neutral-900 text-white py-2 rounded hover:bg-neutral-700 transition">
             Editar Perfil
           </button>
         </Link>
         <Link to="/profile/password">
-          <button className="w-full bg-neutral-600 text-white py-2 rounded hover:bg-neutral-700 transition">
+          <button className="w-full bg-neutral-900 text-white py-2 rounded hover:bg-neutral-700 transition">
             Cambiar Contraseña
           </button>
         </Link>

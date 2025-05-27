@@ -13,7 +13,7 @@ export default function Cart() {
   );
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-8">
+    <div className="max-w-4xl w-full mx-auto p-6 bg-white rounded-lg shadow mt-20 mb-20">
       <h2 className="text-2xl font-bold mb-4">Tu Carrito</h2>
 
       {cart.length === 0 ? (
@@ -59,7 +59,7 @@ export default function Cart() {
 
           <button
             onClick={() => navigate('/checkout')}
-            className="w-full mt-6 bg-neutral-600 text-white py-3 rounded-md hover:bg-neutral-700 transition"
+            className="w-full mt-6 bg-neutral-900 text-white py-3 rounded-md hover:bg-neutral-700 transition"
           >
             Pagar
           </button>
