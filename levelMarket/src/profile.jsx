@@ -5,7 +5,6 @@ import Loading from './assets/Loading';
 import API_BASE from './config';
 
 export default function Profile() {
-  const navigate = useNavigate()
   const { setUser } = useContext(AuthContext);
   const { user, loading } = useContext(AuthContext);
 
@@ -22,7 +21,7 @@ export default function Profile() {
       });
       if (res.ok) {
         setUser(null);
-        navigate('/login');
+        <Navigate to="/login" replace />
       }  
     } catch (err) {
       console.error('Error borrando cuenta:', err);

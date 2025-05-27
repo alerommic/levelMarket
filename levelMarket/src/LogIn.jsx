@@ -30,7 +30,6 @@ const Login = () => {
       return setError(msg);                        
     }
     const { user } = await res.json();
-    console.log(user)
     setUser(user);
     console.log('Login exitoso');
     navigate('/');
