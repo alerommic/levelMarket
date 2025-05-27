@@ -20,16 +20,11 @@ export default function Profile() {
         credentials: 'include'
       });
       if (res.ok) {
-        // Limpiamos el contexto y redirigimos al login
         setUser(null);
         navigate('/login');
-      } else {
-        const { error } = await res.json();
-        alert(`No se pudo borrar la cuenta: ${error}`);
-      }
+      }  
     } catch (err) {
       console.error('Error borrando cuenta:', err);
-      alert('Se produjo un error al intentar borrar la cuenta.');
     }
   };
 
