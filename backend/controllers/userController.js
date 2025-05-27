@@ -61,6 +61,51 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const deleteSelfUser = async (req, res) => {
+  const sessionUser = req.session.user;
+  if (!sessionUser) return res.status(401).json({ error: 'No autenticado' });
+  req.params.userid = sessionUser.id;
+  const { userid } = req.params;
+  const client = await pool.connect();
+  try {
+    await client.query('BEGIN');
+
+    // Borra los detalles de pedido
+    await client.query(
+      `DELETE FROM orderdetails 
+        WHERE orderid IN (
+          SELECT orderid FROM orders WHERE userid = $1
+        )`,
+      [userid]
+    );
+
+    // Borra los pedidos
+    await client.query(
+      `DELETE FROM orders WHERE userid = $1`,
+      [userid]
+    );
+
+    // Borra el usuario
+    const delUser = await client.query(
+      `DELETE FROM users WHERE userid = $1 RETURNING *`,
+      [userid]
+    );
+
+    if (delUser.rowCount === 0) {
+      await client.query('ROLLBACK');
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    await client.query('COMMIT');
+    return res.sendStatus(204);
+  } catch (err) {
+    await client.query('ROLLBACK');
+    console.error('Error al borrar el usuario:', err);
+    return res.status(500).json({ error: 'Error en el servidor' });
+  } finally {
+    client.release();
+  }
+};
 
 const updateUser = async (req, res) => {
   const user = req.session.user;
@@ -83,4 +128,4 @@ const updateUser = async (req, res) => {
 };
 
 
-module.exports = { getUserList, deleteUser, updateUser };
+module.exports = { getUserList, deleteUser, updateUser, deleteSelfUser };

@@ -49,7 +49,7 @@ const CarruselGames = Array.isArray(gameList) ? gameList.slice(0, 4) : []
           {isPending && <Loading/>}
           {CarruselGames && 
             <div className="relative">
-              <div className="overflow-hidden rounded-2xl h-110 w-80 ">
+              <div className="overflow-hidden rounded-2xl h-120 w-80 ">
                 <div 
                   className="flex transition-transform duration-500 ease-in-out"
                   style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -62,7 +62,7 @@ const CarruselGames = Array.isArray(gameList) ? gameList.slice(0, 4) : []
                           <img 
                             src={game.imageurl || "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=600&fit=crop"} 
                             alt={game.name}
-                            className="rounded-t-lg mx-auto w-[400x] h-[500px] cursor-pointer object-cover rounded-lg shadow-2xl"
+                            className="rounded-t-lg mx-auto w-[450x] h-[550px] cursor-pointer object-cover rounded-lg shadow-2xl"
                             onError={(e) => {
                               e.target.src = "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=600&fit=crop";
                             }}

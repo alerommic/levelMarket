@@ -59,7 +59,7 @@ export default function EditProfile() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow mt-8">
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow mt-20">
       <h2 className="text-2xl font-bold mb-4">Editar Perfil</h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
 

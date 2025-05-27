@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { register, login, logout ,getMe, changePassword } = require('../controllers/authController');
-const { updateUser } = require('../controllers/userController')
+const { updateUser, deleteSelfUser } = require('../controllers/userController')
+const {  } = require()
 const requireLogin = require('../middlewares/requireLogin')
 
 // Registro
@@ -21,5 +22,7 @@ router.get('/me', requireLogin, getMe);
 router.put('/updateUser', requireLogin, updateUser);
 
 router.put('/profile/password', requireLogin, changePassword);
+
+router.delete('/profile/deleteMe', requireLogin, deleteSelfUser);
 
 module.exports = router;
