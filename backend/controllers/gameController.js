@@ -45,6 +45,8 @@ const deleteGame = async (req, res) => {
   const { id } = req.params;
   try {
     const client = await pool.connect();
+    //borra el orderdetail del juego
+    await client.query('DELETE FROM OrderDetails WHERE gameid = $1', [id]);
 
     //borra la imagen asociada
     
