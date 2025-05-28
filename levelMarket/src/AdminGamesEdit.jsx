@@ -28,7 +28,7 @@ function AdminProductEdit() {
         setForm({
           name: data.name,
           price: data.price,
-          releaseDate: data.releasedate ? data.releasedate.split('T')[0] : '',
+          releaseDate: data.releasedate,
           genre: data.genre,
           platform: data.platform,
           stock: data.stock,

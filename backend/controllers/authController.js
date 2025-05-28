@@ -63,7 +63,7 @@ const login = async (req, res) => {
     return res.json({ user: req.session.user });
   } catch (err) {
     console.error('Error en el login:', err);
-    return res.status(500).json({ error: 'Error del servidor' });
+    return res.status(500).json({ error: 'Error en el servidor' });
   }
 };
 
@@ -84,13 +84,7 @@ const getMe = async (req, res) => {
   const userId = req.session.user.id;
   try {
     const { rows } = await pool.query(
-      `SELECT 
-        userid,
-        username,
-        email,
-        fullname,
-        address,
-        is_admin
+      `SELECT userid, username, email, fullname, address, is_admin
       FROM users
       WHERE userid = $1`,
       [userId]
@@ -101,7 +95,7 @@ const getMe = async (req, res) => {
     res.json({ user: rows[0] });
   } catch (err) {
     console.error('Error en /me:', err.message);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    res.status(500).json({ error: 'Error en el servidor' });
   }
 };
 
@@ -129,7 +123,7 @@ const changePassword = async (req, res) => {
       return res.status(400).json({ error: 'Contraseña actual incorrecta' });
     }
 
-    // Hashear la nueva contraseña
+    // Hashea la nueva contraseña
     const newHash = await bcrypt.hash(newPassword, 10);
 
     // Actualizar en la base de datos
@@ -144,7 +138,5 @@ const changePassword = async (req, res) => {
     res.status(500).json({ error: 'Error en el servidor' });
   }
 };
-
-
 
 module.exports = { register, login, logout, getMe, changePassword };

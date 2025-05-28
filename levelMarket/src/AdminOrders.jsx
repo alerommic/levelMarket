@@ -107,7 +107,7 @@ export default function AdminOrders() {
                   )}
                   {order.status === 'Canceled' && (
                     <>
-                    <button
+                    <button 
                       onClick={() => handleDeleteOrder(order.orderid)}
                       className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
                     >

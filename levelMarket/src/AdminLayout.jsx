@@ -4,7 +4,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 function AdminLayout() {
   return (
     <div className="min-h-screen flex">
-      <aside className="min-w-30s bg-neutral-600 text-white p-4">
+      <aside className="min-w-30 bg-neutral-600 text-white p-4">
         <h2 className="text-xl mb-4">Admin</h2>
         <nav className="flex flex-col gap-3">
           <NavLink to="/admin" end

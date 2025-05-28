@@ -148,9 +148,4 @@ const createGame = async (req, res) => {
   }
 };
 
-
-
-
-
-
 module.exports = { getGameList, getGameById , deleteGame, updateGame, createGame};

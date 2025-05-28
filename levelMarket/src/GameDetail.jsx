@@ -6,10 +6,9 @@ import { CartContext } from './CartContext';
 import API_BASE from './config';
 
 export default function GameDetail() {
-  // Lee el id del url
+
   const { id } = useParams();
 
-  // 2) le pasa el id del url
   const { data: game, isPending, error } = useFetch(`${API_BASE}/GameList/${id}`);
 
   const { addItem } = useContext(CartContext);

@@ -60,12 +60,9 @@ const CarruselGames = Array.isArray(gameList) ? gameList.slice(0, 4) : []
                         <div className="relative h-110 w-80 mx-auto">
                         <Link to={`/GameList/${game.gameid}`}>
                           <img 
-                            src={game.imageurl || "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=600&fit=crop"} 
+                            src={game.imageurl} 
                             alt={game.name}
                             className="rounded-t-lg mx-auto w-[450x] h-[550px] cursor-pointer object-cover rounded-lg shadow-2xl"
-                            onError={(e) => {
-                              e.target.src = "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=600&fit=crop";
-                            }}
                           />
                           </Link>
                           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent rounded-lg pointer-events-none"></div>

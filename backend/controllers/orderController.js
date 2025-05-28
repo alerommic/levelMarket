@@ -7,11 +7,7 @@ const getUserOrderList = async (req, res) => {
   try {
     const client = await pool.connect();
     const query = `
-      SELECT 
-        o.orderid,
-        o.orderdate,
-        o.totalamount,
-        o.status,
+      SELECT o.orderid, o.orderdate, o.totalamount, o.status,
         json_agg(
           json_build_object(
             'gameid', g.gameid,
@@ -56,7 +52,7 @@ const getOrderList = async (req, res) => {
 
 const updateOrderStatus = async (req, res) => {
   const { orderId } = req.params;
-  const { status }    = req.body; // 'completed'
+  const { status }    = req.body; // 'Completed'
   const client = await pool.connect();
   try {
     await client.query('BEGIN');

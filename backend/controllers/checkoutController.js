@@ -25,7 +25,6 @@ const checkout = async (req, res) => {
   try {
     await client.query('BEGIN');
     
-    // Inserta orden preliminar
     const orderRes = await client.query(
       `INSERT INTO orders (userid, shippingaddress, totalamount)
       VALUES ($1, (SELECT address FROM users WHERE userid=$1), 0)
@@ -35,7 +34,6 @@ const checkout = async (req, res) => {
     const orderId = orderRes.rows[0].orderid;
     let total = 0;
 
-    // Recorre cada item: verifica stock, calcula precio y guarda detalles
     for (const { gameid, quantity } of items) {
       // Obtiene precio y stock actual
       const { rows: gameRows } = await client.query(
@@ -49,10 +47,10 @@ const checkout = async (req, res) => {
 
       // Verifica que haya stock suficiente
       if (quantity > stock) {
-        throw new Error(`Stock insuficiente para juego ID ${gameid}. Disponible: ${stock}, solicitado: ${quantity}`);
+        throw new Error(`Stock insuficiente`);
       }
 
-      // Guarda los order details 
+      // Guarda los orderdetails 
       total += price * quantity;
       await client.query(
         `INSERT INTO orderdetails (orderid, gameid, quantity, price)
@@ -83,7 +81,7 @@ const checkout = async (req, res) => {
       to: toEmail,
       subject: `Pedido #${orderId} registrado`,
       text: `Tu pedido #${orderId} por importe ${total.toFixed(2)}€ ha sido registrado.\n` +
-            `Realiza la transferencia a la cuenta ESXX XXXX XXXX indicando como concepto #${orderId}.`
+            `Realiza la transferencia a la cuenta ES74 8328 9234 9234 2394 indicando como concepto #${orderId}.`
     });
 
     res.json({ orderId });

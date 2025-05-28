@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
       .then(data => setUser(data.user))
       .catch(() => setUser(null))
       .finally(() => setLoading(false));
-  }, []);
+  }, [user]);
 
   return (
     <AuthContext.Provider value={{ user, setUser, loading }}>
