@@ -5,7 +5,6 @@ import Loading from './assets/Loading';
 import API_BASE from './config';
 
 export default function Profile() {
-  const { setUser } = useContext(AuthContext);
   const { user, loading } = useContext(AuthContext);
 
   if (loading) return <Loading />;
@@ -27,8 +26,6 @@ export default function Profile() {
       console.error('Error borrando cuenta:', err);
     }
   };
-
-  setUser(user);
 
   return (
     <div className="max-w-md w-full mx-auto p-6 bg-white rounded-lg shadow mt-20">
