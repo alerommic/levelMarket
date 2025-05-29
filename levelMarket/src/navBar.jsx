@@ -20,7 +20,8 @@ const NavBar = () => {
   // Comprueba estado de autenticación
   const { user, setUser } = useContext(AuthContext);
 
-  // Cierra el menu desplegable al hacer clic fuera
+  //Para que el menu desplegable se cierre al dar clicks fuera
+  //me ayudo chatgpt en el addEventListener
   useEffect(() => {
     const handler = e => {
       if (userRef.current && !userRef.current.contains(e.target)) {

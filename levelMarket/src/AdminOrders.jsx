@@ -4,7 +4,7 @@ import Loading from './assets/Loading';
 import API_BASE from './config'
 
 export default function AdminOrders() {
-  const { user, loading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState('');
