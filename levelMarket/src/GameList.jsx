@@ -88,12 +88,6 @@ const GameList = () => {
             value={filters.priceRange}
             onChange={handlePriceChange}
             className="w-full"
-            trackStyle={[{ backgroundColor: '#3b82f6' }]}
-            handleStyle={[
-              { borderColor: '#3b82f6', backgroundColor: '#3b82f6' },
-              { borderColor: '#3b82f6', backgroundColor: '#3b82f6' }
-            ]}
-            
           />
         </div>
       </div>
