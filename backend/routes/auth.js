@@ -20,8 +20,11 @@ router.get('/me', requireLogin, getMe);
 
 router.put('/updateUser', requireLogin, updateUser);
 
+//cambiar contraseña
+
 router.put('/profile/password', requireLogin, changePassword);
 
+//Borrar usuario (el mismo)
 router.delete('/profile/deleteMe', requireLogin, deleteSelfUser);
 
 module.exports = router;
