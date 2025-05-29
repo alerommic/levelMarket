@@ -11,7 +11,7 @@ export default function Orders() {
   const [error, setError]       = useState('');
 
   useEffect(() => {
-    if (loading || !user) return;
+    if (!user) return;
     fetch(`${API_BASE}/orders`, { credentials: 'include' })
       .then(res => {
         if (!res.ok) throw new Error('No autorizado o error al cargar pedidos');
@@ -20,7 +20,7 @@ export default function Orders() {
       .then(data => setOrders(data))
       .catch(err => setError(err.message))
       .finally(() => setPending(false));
-  }, [user, loading]);
+  }, [user]);
 
   if (loading) return <Loading />;
   if (!user)   return <Navigate to="/login" replace />;
@@ -29,9 +29,8 @@ export default function Orders() {
     <div className="max-w-3xl w-full mx-auto p-6 bg-white rounded-lg shadow mt-20 mb-20">
       <h2 className="text-2xl font-bold mb-4">Mis Pedidos</h2>
       {error && <p className="text-red-500 mb-4">{error}</p>}
-      {isPending
-        ? <Loading />
-        : orders.length === 0
+      {isPending&& <Loading />}
+        {orders.length === 0
           ? <p className="text-gray-600">Aún no tienes pedidos.</p>
           : orders.map(order => (
               <div key={order.orderid} className="mb-8">
