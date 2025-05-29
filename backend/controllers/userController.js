@@ -63,7 +63,7 @@ const deleteUser = async (req, res) => {
 
 const deleteSelfUser = async (req, res) => {
   const sessionUser = req.session.user;
-  if (!sessionUser) return res.status(401).json({ error: 'No autenticado' });
+  if (!sessionUser) return res.status(401).json({ error: 'No hay sesion' });
   req.params.userid = sessionUser.id;
   const { userid } = req.params;
   const client = await pool.connect();
@@ -109,7 +109,7 @@ const deleteSelfUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const user = req.session.user;
-  if (!user) return res.status(401).json({ error: 'No autorizado' });
+  if (!user) return res.status(401).json({ error: 'No hay sesion' });
 
   const { username, email, fullname, address } = req.body;
   try {

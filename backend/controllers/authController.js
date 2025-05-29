@@ -79,7 +79,7 @@ const logout = (req, res) => {
 
 const getMe = async (req, res) => {
   if (!req.session.user) {
-    return res.status(401).json({ error: 'No autorizado' });
+    return res.status(401).json({ error: 'No hay sesion' });
   }
   const userId = req.session.user.id;
   try {
@@ -102,7 +102,7 @@ const getMe = async (req, res) => {
 const changePassword = async (req, res) => {
   const userId = req.session.user?.id;
   const { currentPassword, newPassword } = req.body;
-  if (!userId) return res.status(401).json({ error: 'No autorizado' });
+  if (!userId) return res.status(401).json({ error: 'No hay sesion' });
 
   try {
     const client = await pool.connect();

@@ -40,9 +40,7 @@ export default function GameDetail() {
                 </h1>
                 <p className="text-gray-600 mb-2">
                   <span className="font-medium"><strong>Fecha de salida:</strong></span>{' '}
-                  {game.releasedate
-                    ? new Date(game.releasedate).toLocaleDateString()
-                    : '-'}
+                  {new Date(game.releasedate).toLocaleDateString()}
                 </p>
                 <p className="text-gray-600 mb-2">
                   <span className="font-medium"><strong>Género:</strong></span> {game.genre}

@@ -2,7 +2,7 @@ const pool = require('../db');
 
 const getUserOrderList = async (req, res) => {
   const userId = req.session.user?.id;
-  if (!userId) return res.status(401).json({ error: 'No autorizado' });
+  if (!userId) return res.status(401).json({ error: 'No hay sesion' });
 
   try {
     const client = await pool.connect();
@@ -26,7 +26,7 @@ const getUserOrderList = async (req, res) => {
     client.release();
     res.json(rows);
   } catch (error) {
-    console.error("Error al obtener la lista de pedidos:", error.message);
+    console.error("Error al obtener la lista de pedidos junto a sus detalles:", error.message);
     res.status(500).json({ error: "Error en el servidor" });
   }
 };
@@ -52,7 +52,7 @@ const getOrderList = async (req, res) => {
 
 const updateOrderStatus = async (req, res) => {
   const { orderId } = req.params;
-  const { status }    = req.body; // 'Completed'
+  const { status }    = req.body; // 'Completed' 'Pending' 'Canceled'
   const client = await pool.connect();
   try {
     await client.query('BEGIN');

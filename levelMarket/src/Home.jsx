@@ -8,7 +8,8 @@ const Home = () => {
   const {data : gameList = [], isPending, error} = useFetch(`${API_BASE}/GameList`);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-
+//Chatgpt ha generado el carrusel y ha sido editado para tener el aspecto deseado
+//en la pagina
 const CarruselGames = Array.isArray(gameList) ? gameList.slice(0, 4) : []
   useEffect(() => {
     if (CarruselGames.length > 0) {
