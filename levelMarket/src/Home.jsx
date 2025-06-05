@@ -47,7 +47,7 @@ const CarruselGames = Array.isArray(gameList) ? gameList.slice(0, 4) : []
           <h2 className="text-4xl font-bold text-center mb-12">Juegos Destacados</h2>
           
           {error && <div className="align-middle">{error}</div>}
-          {isPending && <div className="absolute z-20 right-10"><Loading /></div>}
+          {isPending && <div className="z-20 align-middle absolute left-1/2"><Loading /></div>}
           {CarruselGames && 
             <div className="relative overflow-visible">
               <div className="overflow-hidden rounded-2xl h-120 w-80 mx-auto">
